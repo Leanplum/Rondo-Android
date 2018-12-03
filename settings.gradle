@@ -19,12 +19,6 @@ project(':AndroidSDKFcm').projectDir = new File('../Leanplum-Android-SDK/Android
 include ':AndroidSDKLocation'
 project(':AndroidSDKLocation').projectDir = new File('../Leanplum-Android-SDK/AndroidSDKLocation')
 
-include ':AndroidSDKUIEditor'
-project(':AndroidSDKUIEditor').projectDir = new File('../Leanplum-Android-UIEditor/AndroidSDKUIEditor')
-
-include ':AndroidSDKUIEditorTests'
-project(':AndroidSDKUIEditorTests').projectDir = new File('../Leanplum-Android-UIEditor/AndroidSDKUIEditorTests')
-
 include ':Leanplum-Android-SDK'
 project(':Leanplum-Android-SDK').projectDir = new File('../Leanplum-Android-SDK/')
 
