@@ -27,21 +27,21 @@ android {
 }
 
 dependencies {
+
+    //External Dependencies
+    implementation "com.google.android.gms:play-services-location:16.0.0"
+    implementation 'com.google.firebase:firebase-messaging:17.3.3' // for FCM
+//    implementation "com.google.android.gms:play-services-gcm:11.8+" // for GCM
+
+    // Released Packages
     implementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
     implementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
+    implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
+    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
+//    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
+    
 
 //    implementation "com.leanplum:leanplum-monitoring:+"
-
-    implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
-    implementation "com.google.android.gms:play-services-location:16.0.0"
-
-    // Enable for FCM
-    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
-    implementation 'com.google.firebase:firebase-messaging:17.3.3'
-    
-    // Enable for GCM
-//    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
-//    implementation "com.google.android.gms:play-services-gcm:11.8+" // Use Google's GCM library.
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.0.2'
