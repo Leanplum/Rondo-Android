@@ -34,12 +34,19 @@ dependencies {
 //    implementation "com.google.android.gms:play-services-gcm:11.8+" // for GCM
 
     // Released Packages
-    implementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
-    implementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
-    implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
-    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
-//    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
-    
+//    implementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
+//    implementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
+//    implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
+//    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
+////    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
+
+    // Source
+    implementation project(':AndroidSDK')
+    implementation project(':AndroidSDKCore')
+    implementation project(':AndroidSDKPush')
+    implementation project(':AndroidSDKLocation')
+    implementation project(':AndroidSDKFcm')
+//    implementation project(':AndroidSDKGcm')
 
 //    implementation "com.leanplum:leanplum-monitoring:+"
 
