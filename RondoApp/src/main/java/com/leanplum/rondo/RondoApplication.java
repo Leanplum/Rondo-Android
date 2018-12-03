@@ -8,6 +8,9 @@ import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.annotations.Parser;
 import com.leanplum.callbacks.StartCallback;
+import com.leanplum.rondo.models.LeanplumApp;
+
+import io.realm.Realm;
 
 public class RondoApplication extends Application {
 
@@ -26,5 +29,9 @@ public class RondoApplication extends Application {
 
         Parser.parseVariables(this);
         LeanplumActivityHelper.enableLifecycleCallbacks(this);
+
+        Realm.init(this);
+        LeanplumAppPersistence.seedDatabase();
+        LeanplumEnvPersistence.seedDatabase();
     }
 }

@@ -1,19 +1,15 @@
 package com.leanplum.rondo.models;
 
-public class LeanplumApp {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class LeanplumApp extends RealmObject {
+    @PrimaryKey
+    private String displayName;
+
     private String appId;
     private String devKey;
     private String prodKey;
-    private String displayName;
-
-    static public LeanplumApp rondoQAProduction() {
-        LeanplumApp app = new LeanplumApp();
-        app.appId = "app_ve9UCNlqI8dy6Omzfu1rEh6hkWonNHVZJIWtLLt6aLs";
-        app.devKey = "dev_cKF5HMpLGqhbovlEGMKjgTuf8AHfr2Jar6rrnNhtzQ0";
-        app.prodKey = "prod_D5ECYBLrRrrOYaFZvAFFHTg1JyZ2Llixe5s077Lw3rM";
-        app.displayName = "Rondo QA Production";
-        return app;
-    }
 
     public String getAppId() {
         return appId;

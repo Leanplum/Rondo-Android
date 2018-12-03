@@ -8,6 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.leanplum.Leanplum;
+import com.leanplum.annotations.Parser;
+import com.leanplum.rondo.models.InternalState;
+import com.leanplum.rondo.models.LeanplumApp;
+import com.leanplum.rondo.models.LeanplumEnv;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -44,7 +50,37 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_layout, new SdkQaFragment());
         transaction.commit();
 
-        //Used to select an item programmatically
-        //bottomNavigationView.getMenu().getItem(2).setChecked(true);
+        setUpInitialAppState();
+        initLeanplum();
     }
+
+    private void setUpInitialAppState() {
+        InternalState state = InternalState.sharedState();
+        RondoPreferences rondoPreferences = RondoPreferences.getRondoPreferences();
+        state.setApp(rondoPreferences.getApp());
+        state.setEnv(rondoPreferences.getEnv());
+    }
+
+    private void initLeanplum() {
+        InternalState state = InternalState.sharedState();
+
+        LeanplumApp app = state.getApp();
+
+        Leanplum.setAppIdForDevelopmentMode(
+                app.getAppId(),
+                BuildConfig.DEBUG ? app.getDevKey() : app.getProdKey()
+        );
+
+        LeanplumEnv env = state.getEnv();
+
+        Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
+        Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
+        Parser.parseVariablesForClasses(VariablesActivity.class);
+
+        // Enable for GCM
+//        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
+
+        Leanplum.start(this);
+    }
+
 }

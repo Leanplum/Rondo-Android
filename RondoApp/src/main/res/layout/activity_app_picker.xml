@@ -13,9 +13,14 @@
             android:id="@+id/create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:text="Connect Leanplum App"
             android:textSize="14dp"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
@@ -23,5 +28,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
         </ListView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

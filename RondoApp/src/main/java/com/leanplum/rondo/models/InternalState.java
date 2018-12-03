@@ -2,7 +2,7 @@ package com.leanplum.rondo.models;
 
 public class InternalState {
     private LeanplumApp app;
-    private LeanplumEnvironment env;
+    private LeanplumEnv env;
 
     private static final InternalState instance = new InternalState();
 
@@ -14,7 +14,7 @@ public class InternalState {
         this.app = app;
     }
 
-    public void setEnv(LeanplumEnvironment env) {
+    public void setEnv(LeanplumEnv env) {
         this.env = env;
     }
 
@@ -22,7 +22,7 @@ public class InternalState {
         return app;
     }
 
-    public LeanplumEnvironment getEnv() {
+    public LeanplumEnv getEnv() {
         return env;
     }
 }

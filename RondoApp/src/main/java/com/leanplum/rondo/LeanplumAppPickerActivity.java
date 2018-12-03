@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.leanplum.rondo.adapters.LeanplumAppAdapter;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
-import com.leanplum.rondo.models.LeanplumEnvironment;
 
 import java.util.ArrayList;
 
@@ -21,14 +20,20 @@ public class LeanplumAppPickerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_picker);
+        createButton();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadData();
+    }
+
+    private void reloadData() {
         final ListView listview = findViewById(R.id.listview);
 
-        LeanplumApp[] apps = new LeanplumApp[] {LeanplumApp.rondoQAProduction()};
+        final ArrayList<LeanplumApp> list = LeanplumAppPersistence.loadLeanplumApps();
 
-        final ArrayList<LeanplumApp> list = new ArrayList<LeanplumApp>();
-        for (int i = 0; i < apps.length; ++i) {
-            list.add(apps[i]);
-        }
         final LeanplumAppAdapter adapter = new LeanplumAppAdapter(this,
                 list);
         listview.setAdapter(adapter);
@@ -40,11 +45,11 @@ public class LeanplumAppPickerActivity extends AppCompatActivity {
                                     int position, long id) {
                 final LeanplumApp app = (LeanplumApp) parent.getItemAtPosition(position);
                 InternalState.sharedState().setApp(app);
+                RondoPreferences.updateRondoPreferencesWithApp(app);
+                finish();
             }
 
         });
-
-        createButton();
     }
 
     private void createButton() {
