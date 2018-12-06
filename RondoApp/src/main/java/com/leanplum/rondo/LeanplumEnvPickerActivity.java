@@ -1,6 +1,7 @@
 package com.leanplum.rondo;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -10,8 +11,6 @@ import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumEnv;
 
 import java.util.ArrayList;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class LeanplumEnvPickerActivity extends AppCompatActivity {
 
