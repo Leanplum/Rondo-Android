@@ -68,10 +68,10 @@
             android:exported="false" />
 
         <activity
-            android:name=".AppInboxActivity"
+            android:name=".AppInboxFragment"
             android:label="App Inbox"/>
         <activity
-            android:name=".VariablesActivity"
+            android:name=".VariablesFragment"
             android:label="Variables"/>
         <activity
             android:name=".TriggersActivity"

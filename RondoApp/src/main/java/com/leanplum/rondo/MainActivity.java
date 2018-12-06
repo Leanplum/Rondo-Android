@@ -1,13 +1,15 @@
 package com.leanplum.rondo;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
 import com.leanplum.rondo.models.InternalState;
@@ -22,20 +24,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
+        bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
-                            case R.id.action_item1:
+                            case R.id.sdq_qa:
                                 selectedFragment = new SdkQaFragment();
                                 break;
-                            case R.id.action_item2:
+                            case R.id.adhoc:
                                 selectedFragment = new AdhocFragment();
                                 break;
-                            case R.id.action_item3:
-                                selectedFragment = new AppSetupActivity();
+                            case R.id.app_setup:
+                                selectedFragment = new AppSetupFragment();
+                                break;
+                            case R.id.app_inbox:
+                                selectedFragment = new AppInboxFragment();
+                                break;
+                            case R.id.variables:
+                                selectedFragment = new VariablesFragment();
                                 break;
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -75,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
         Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
-        Parser.parseVariablesForClasses(VariablesActivity.class);
+        Parser.parseVariablesForClasses(VariablesFragment.class);
 
         // Enable for GCM
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);

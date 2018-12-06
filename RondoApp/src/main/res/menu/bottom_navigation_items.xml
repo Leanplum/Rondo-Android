@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_item1"
+        android:id="@+id/sdq_qa"
         android:title="SDK QA"/>
     <item
-        android:id="@+id/action_item2"
+        android:id="@+id/app_inbox"
+        android:title="App Inbox"/>
+    <item
+        android:id="@+id/variables"
+        android:title="Variables"/>
+    <item
+        android:id="@+id/adhoc"
         android:title="Ad Hoc"/>
     <item
-        android:id="@+id/action_item3"
+        android:id="@+id/app_setup"
         android:title="App Setup"/>
 </menu>

@@ -2,7 +2,7 @@ package com.leanplum.rondo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,7 @@ import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
 
-public class AppSetupActivity extends Fragment {
+public class AppSetupFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class AppSetupActivity extends Fragment {
         createAppPickerButton();
         createEnvPickerButton();
     }
-
 
     @Override
     public void onResume() {
@@ -104,7 +103,7 @@ public class AppSetupActivity extends Fragment {
 
         Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
         Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
-        Parser.parseVariablesForClasses(VariablesActivity.class);
+        Parser.parseVariablesForClasses(VariablesFragment.class);
 
         // Enable for GCM
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);

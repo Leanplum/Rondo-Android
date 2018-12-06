@@ -16,6 +16,16 @@
             android:orientation="vertical"
             android:layout_height="wrap_content"
             android:paddingBottom="40dp">
+            <TextView android:layout_width="match_parent" android:id="@+id/info"
+                android:layout_height="wrap_content" android:textColor="@android:color/black"
+                android:textSize="14dp" android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="You can type in custom events, sessions and attributes to send from here."/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

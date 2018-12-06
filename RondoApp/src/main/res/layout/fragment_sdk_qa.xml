@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -79,20 +79,6 @@
             android:textSize="14dp"
             />
         <Button
-            android:id="@+id/appInbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="App Inbox"
-            android:textSize="14dp"
-            />
-        <Button
-            android:id="@+id/variables"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Variables"
-            android:textSize="14dp"
-            />
-        <Button
             android:id="@+id/messages"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,4 +98,4 @@
             android:background="@android:color/darker_gray"/>
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
