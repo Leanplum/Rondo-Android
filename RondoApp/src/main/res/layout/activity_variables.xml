@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="var_string:"
+                android:text="var_text:"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14dp" />
 

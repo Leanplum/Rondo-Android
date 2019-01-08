@@ -1,13 +1,17 @@
 package com.leanplum.rondo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
+import com.leanplum.rondo.adapters.LeanplumAppAdapter;
 import com.leanplum.rondo.adapters.LeanplumEnvAdapter;
 import com.leanplum.rondo.models.InternalState;
+import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
 
 import java.util.ArrayList;
@@ -18,6 +22,16 @@ public class LeanplumEnvPickerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_env_picker);
+        createButton();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadData();
+    }
+
+    private void reloadData() {
         final ListView listview = findViewById(R.id.listview);
 
         final ArrayList<LeanplumEnv> list = LeanplumEnvPersistence.loadLeanplumEnvs();
@@ -38,4 +52,16 @@ public class LeanplumEnvPickerActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void createButton() {
+        Button button = findViewById(R.id.create);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(LeanplumEnvPickerActivity.this, EnvCreateActivity.class);
+                startActivity(myIntent);
+            }
+        });
+    }
+
 }

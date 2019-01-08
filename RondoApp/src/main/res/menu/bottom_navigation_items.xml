@@ -2,17 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/sdq_qa"
-        android:title="SDK QA"/>
+        android:title="SDK QA"
+        android:icon="@drawable/ic_qa"
+        />
     <item
         android:id="@+id/app_inbox"
-        android:title="App Inbox"/>
+        android:title="App Inbox"
+        android:icon="@drawable/ic_inbox"
+        />
     <item
         android:id="@+id/variables"
-        android:title="Variables"/>
+        android:title="Variables"
+        android:icon="@drawable/ic_variables"
+        />
     <item
         android:id="@+id/adhoc"
-        android:title="Ad Hoc"/>
+        android:title="Ad Hoc"
+        android:icon="@drawable/ic_adhoc"
+        />
     <item
         android:id="@+id/app_setup"
-        android:title="App Setup"/>
+        android:title="App Setup"
+        android:icon="@drawable/ic_setup"
+        />
 </menu>

@@ -91,6 +91,9 @@
         <activity
             android:name=".AppCreateActivity"
             android:label="Create App"/>
+        <activity
+            android:name=".EnvCreateActivity"
+            android:label="Create Env"/>
     </application>
 
 </manifest>
