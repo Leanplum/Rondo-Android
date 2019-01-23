@@ -1,16 +1,13 @@
 package com.leanplum.rondo;
 
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.leanplum.Leanplum;
 import com.leanplum.Var;
 import com.leanplum.annotations.File;
-import com.leanplum.annotations.Variable;
-import com.leanplum.callbacks.VariablesChangedCallback;
 
 public class VariablesActivity extends AppCompatActivity {
     Var<String> composerName = Var.define("composerName", "Composer name");

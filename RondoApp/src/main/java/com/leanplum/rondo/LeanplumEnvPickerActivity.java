@@ -2,16 +2,14 @@ package com.leanplum.rondo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.leanplum.rondo.adapters.LeanplumAppAdapter;
 import com.leanplum.rondo.adapters.LeanplumEnvAdapter;
 import com.leanplum.rondo.models.InternalState;
-import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
 
 import java.util.ArrayList;

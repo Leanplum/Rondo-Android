@@ -2,7 +2,7 @@ package com.leanplum.rondo;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +16,7 @@ import android.widget.TextView;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumInbox;
 import com.leanplum.LeanplumInboxMessage;
-import com.leanplum.rondo.adapters.LeanplumAppAdapter;
 import com.leanplum.rondo.adapters.LeanplumInboxMessageAdapter;
-import com.leanplum.rondo.models.InternalState;
-import com.leanplum.rondo.models.LeanplumApp;
 
 import java.io.File;
 import java.util.ArrayList;
