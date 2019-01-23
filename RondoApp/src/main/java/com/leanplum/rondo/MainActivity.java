@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, new SdkQaFragment());
+        transaction.replace(R.id.frame_layout, new AppSetupFragment());
         transaction.commit();
 
         setUpInitialAppState();
