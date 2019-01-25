@@ -38,7 +38,7 @@ public class PushActivity extends AppCompatActivity {
 
         String[] values = new String[] { "pushRender", "pushAction", "pushImage",
                 "pushExistingAction", "pushURL", "pushOptions", "pushLocal", "pushLocalCancel",
-                "pushMuted"};
+                "pushMuted", "pushLocalSamePriorityTime", "pushLocalSamePriorityDifferentTime"};
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {

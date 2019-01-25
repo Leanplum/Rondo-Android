@@ -48,12 +48,30 @@ public class LeanplumEnvPersistence {
         return env;
     }
 
+    static public LeanplumEnv staging() {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        LeanplumEnv env = realm.where(LeanplumEnv.class).
+                equalTo("apiHostName", "leanplum-staging.appspot.com").findFirst();
+        realm.commitTransaction();
+        return env;
+    }
+
     public static void seedDatabase() {
+        Realm realm = Realm.getDefaultInstance();
         if (production() == null) {
-            Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
             realm.copyToRealm(productionSeed());
+            realm.commitTransaction();
+        }
+        if (qa() == null) {
+            realm.beginTransaction();
             realm.copyToRealm(qaSeed());
+            realm.commitTransaction();
+        }
+        if (staging() == null) {
+            realm.beginTransaction();
+            realm.copyToRealm(stagingSeed());
             realm.commitTransaction();
         }
     }
@@ -72,6 +90,15 @@ public class LeanplumEnvPersistence {
         env.setApiHostName("leanplum-qa-1372.appspot.com");
         env.setApiSSL(true);
         env.setSocketHostName("dev-qa.leanplum.com");
+        env.setSocketPort(80);
+        return env;
+    }
+
+    static private LeanplumEnv stagingSeed() {
+        LeanplumEnv env = new LeanplumEnv();
+        env.setApiHostName("leanplum-staging.appspot.com");
+        env.setApiSSL(true);
+        env.setSocketHostName("dev-staging.leanplum.com");
         env.setSocketPort(80);
         return env;
     }

@@ -23,6 +23,7 @@ public class TriggersActivity extends AppCompatActivity {
         createSessionLimitButton();
         createLifetimeLimitButton();
         createChainedIAMButton();
+        createDifferentPrioritySameTimeAlertButton();
     }
 
     private void createEventTriggerButton() {
@@ -83,6 +84,16 @@ public class TriggersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Leanplum.track("chainedInApp");
+            }
+        });
+    }
+
+    private void createDifferentPrioritySameTimeAlertButton() {
+        Button button = findViewById(R.id.diffPrioritySameTime);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Leanplum.track("DifferentPrioritySameTime");
             }
         });
     }
