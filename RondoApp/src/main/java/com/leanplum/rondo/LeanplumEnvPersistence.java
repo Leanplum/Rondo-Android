@@ -89,8 +89,8 @@ public class LeanplumEnvPersistence {
         LeanplumEnv env = new LeanplumEnv();
         env.setApiHostName("leanplum-qa-1372.appspot.com");
         env.setApiSSL(true);
-        env.setSocketHostName("dev-qa.leanplum.com");
-        env.setSocketPort(80);
+        env.setSocketHostName("dev-qa-1372.leanplum.com");
+        env.setSocketPort(443);
         return env;
     }
 
@@ -99,7 +99,7 @@ public class LeanplumEnvPersistence {
         env.setApiHostName("leanplum-staging.appspot.com");
         env.setApiSSL(true);
         env.setSocketHostName("dev-staging.leanplum.com");
-        env.setSocketPort(80);
+        env.setSocketPort(443);
         return env;
     }
 }

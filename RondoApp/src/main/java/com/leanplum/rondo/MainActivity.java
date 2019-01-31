@@ -1,5 +1,6 @@
 package com.leanplum.rondo;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -7,12 +8,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
+import com.leanplum.rondo.models.RondoProductionMode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         setUpInitialAppState();
         initLeanplum();
+
     }
 
     private void setUpInitialAppState() {
@@ -71,10 +77,17 @@ public class MainActivity extends AppCompatActivity {
 
         LeanplumApp app = state.getApp();
 
-        Leanplum.setAppIdForDevelopmentMode(
-                app.getAppId(),
-                BuildConfig.DEBUG ? app.getDevKey() : app.getProdKey()
-        );
+        if (RondoProductionMode.isProductionMode(this)) {
+            Leanplum.setAppIdForProductionMode(
+                    app.getAppId(),
+                    app.getProdKey()
+            );
+        } else {
+            Leanplum.setAppIdForDevelopmentMode(
+                    app.getAppId(),
+                    app.getDevKey()
+            );
+        }
 
         LeanplumEnv env = state.getEnv();
 
