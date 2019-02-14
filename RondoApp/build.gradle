@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
-def LEANPLUM_SDK_VERSION = "4.3.1"
+def LEANPLUM_SDK_VERSION = "4.3.0"
 
 android {
 
@@ -36,15 +36,15 @@ dependencies {
 
     //External Dependencies
     implementation "com.google.android.gms:play-services-location:16.0.0"
-    implementation 'com.google.firebase:firebase-messaging:17.3.4' // for FCM
-//    implementation "com.google.android.gms:play-services-gcm:11.8+" // for GCM
+//    implementation 'com.google.firebase:firebase-messaging:17.3.4' // for FCM
+    implementation "com.google.android.gms:play-services-gcm:16.0.0" // for GCM
 
     // Released Packages
     implementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
     implementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
     implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
-    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
-//    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
+//    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
+    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
     
 
 //    implementation "com.leanplum:leanplum-monitoring:+"
@@ -60,4 +60,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
 
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
