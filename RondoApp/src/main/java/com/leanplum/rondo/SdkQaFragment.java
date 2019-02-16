@@ -35,6 +35,7 @@ public class SdkQaFragment extends Fragment {
         createTriggersButton();
         createMessagesButton();
         createPushButton();
+        createCrashButton();
     }
 
     @Override
@@ -86,6 +87,17 @@ public class SdkQaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), PushActivity.class);
+                startActivity(myIntent);
+            }
+        });
+    }
+
+    private void createCrashButton() {
+        Button button = getView().findViewById(R.id.crash);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getActivity(), CrashActivity.class);
                 startActivity(myIntent);
             }
         });

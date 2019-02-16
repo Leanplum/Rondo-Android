@@ -23,6 +23,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".CrashActivity"
+            android:label="@string/title_activity_crash"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -69,31 +74,32 @@
 
         <activity
             android:name=".AppInboxFragment"
-            android:label="App Inbox"/>
+            android:label="App Inbox" />
         <activity
             android:name=".VariablesFragment"
-            android:label="Variables"/>
+            android:label="Variables" />
         <activity
             android:name=".TriggersActivity"
-            android:label="Triggers"/>
+            android:label="Triggers" />
         <activity
             android:name=".MessagesActivity"
-            android:label="In App Messages"/>
+            android:label="In App Messages" />
         <activity
             android:name=".PushActivity"
-            android:label="Push Notifications"/>
+            android:label="Push Notifications" />
         <activity
             android:name=".LeanplumAppPickerActivity"
-            android:label="Pick App"/>
+            android:label="Pick App" />
         <activity
             android:name=".LeanplumEnvPickerActivity"
-            android:label="Pick Env"/>
+            android:label="Pick Env" />
         <activity
             android:name=".AppCreateActivity"
-            android:label="Create App"/>
+            android:label="Create App" />
         <activity
             android:name=".EnvCreateActivity"
-            android:label="Create Env"/>
+            android:label="Create Env" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="f5fbda44a9b5e82066a5b742bf34f8b260e1ebe9" />
