@@ -94,6 +94,9 @@
         <activity
             android:name=".EnvCreateActivity"
             android:label="Create Env"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="f5fbda44a9b5e82066a5b742bf34f8b260e1ebe9" />
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.leanplum.rondo;
 import android.app.Application;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.FirebaseApp;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
@@ -10,6 +11,7 @@ import com.leanplum.annotations.Parser;
 import com.leanplum.callbacks.StartCallback;
 import com.leanplum.rondo.models.LeanplumApp;
 
+import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 
 public class RondoApplication extends Application {
@@ -22,6 +24,7 @@ public class RondoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         FirebaseApp.initializeApp(this);
 
