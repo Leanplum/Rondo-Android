@@ -14,6 +14,7 @@ import android.widget.Switch;
 
 import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
+import com.leanplum.callbacks.StartCallback;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
@@ -97,6 +98,21 @@ public class MainActivity extends AppCompatActivity {
 
         // Enable for GCM
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
+
+        Leanplum.addStartResponseHandler(new StartCallback() {
+            @Override
+            public void onResponse(boolean success) {
+                System.out.print("Here");
+            }
+        });
+
+
+        Leanplum.addStartResponseHandler(new StartCallback() {
+            @Override
+            public void onResponse(boolean success) {
+                System.out.print("Here");
+            }
+        });
 
         Leanplum.start(this);
     }
