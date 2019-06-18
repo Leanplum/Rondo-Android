@@ -68,12 +68,6 @@
             android:exported="false" />
 
         <activity
-            android:name=".AppInboxFragment"
-            android:label="App Inbox"/>
-        <activity
-            android:name=".VariablesFragment"
-            android:label="Variables"/>
-        <activity
             android:name=".TriggersActivity"
             android:label="Triggers"/>
         <activity
@@ -94,6 +88,17 @@
         <activity
             android:name=".EnvCreateActivity"
             android:label="Create Env"/>
+        <activity android:name=".DeepLinkActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="deep_link_page"
+                    android:scheme="rondo"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
