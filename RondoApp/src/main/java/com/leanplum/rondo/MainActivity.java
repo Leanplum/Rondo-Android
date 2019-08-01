@@ -1,6 +1,5 @@
 package com.leanplum.rondo;
 
-import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -106,15 +105,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        Leanplum.addStartResponseHandler(new StartCallback() {
-            @Override
-            public void onResponse(boolean success) {
-                System.out.print("Here");
-            }
-        });
-
         Leanplum.start(this);
     }
-
 }
