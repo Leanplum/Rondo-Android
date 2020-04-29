@@ -34,12 +34,28 @@
                 android:textColor="@color/colorPrimaryDark"
                 />
             <EditText
-                android:id="@+id/trackName"
-                android:layout_height="wrap_content"
-                android:hint="Event Name (String)"
-                android:inputType="textNoSuggestions"
-                android:layout_width="fill_parent"
-                android:textSize="16dp">
+                    android:id="@+id/trackName"
+                    android:layout_height="wrap_content"
+                    android:hint="Event Name (String)"
+                    android:inputType="textNoSuggestions"
+                    android:layout_width="fill_parent"
+                    android:textSize="16dp">
+            </EditText>
+            <EditText
+                    android:id="@+id/paramKey"
+                    android:layout_height="wrap_content"
+                    android:hint="Event Parameter Key (String)"
+                    android:inputType="textNoSuggestions"
+                    android:layout_width="fill_parent"
+                    android:textSize="16dp">
+            </EditText>
+            <EditText
+                    android:id="@+id/paramValue"
+                    android:layout_height="wrap_content"
+                    android:hint="Event Parameter Value (String)"
+                    android:inputType="textNoSuggestions"
+                    android:layout_width="fill_parent"
+                    android:textSize="16dp">
             </EditText>
             <Button
                 android:id="@+id/buttonTrack"
@@ -145,6 +161,47 @@
                 android:id="@+id/buttonDeviceLocation"
                 android:layout_height="wrap_content"
                 android:text="Set Device Location"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Set User Id"
+                android:textColor="@color/colorPrimaryDark"
+            />
+            <EditText
+                android:id="@+id/userIdKey"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="UserId (String)"
+                android:inputType="textNoSuggestions"
+                android:textSize="16dp">
+            </EditText>
+            <Button
+                android:id="@+id/buttonUserId"
+                android:layout_height="wrap_content"
+                android:text="Send User Id"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp">
+            <Button
+                android:id="@+id/buttonForceContentUpdate"
+                android:layout_height="wrap_content"
+                android:text="Force Content Update"
                 android:layout_width="fill_parent"
                 android:textSize="16dp">
             </Button>

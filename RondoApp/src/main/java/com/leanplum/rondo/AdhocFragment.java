@@ -41,7 +41,17 @@ public class AdhocFragment extends Fragment {
     private void sendTrackEvent() {
         String eventName = ((EditText)getView().findViewById(R.id.trackName))
             .getText().toString();
-        Leanplum.track(eventName.trim());
+        String paramKey = ((EditText)getView().findViewById(R.id.paramKey))
+                .getText().toString().trim();
+        String paramValue = ((EditText)getView().findViewById(R.id.paramValue))
+                .getText().toString().trim();
+        Map<String, String> params = new HashMap<>();
+        params.put(paramKey, paramValue);
+        if (paramKey != null && paramValue != null) {
+            Leanplum.track(eventName.trim(), params);
+        } else {
+            Leanplum.track(eventName.trim());
+        }
         // TODO: figure out how to alert event response/status
 
         persistence.saveEvent(eventName);
@@ -67,6 +77,15 @@ public class AdhocFragment extends Fragment {
         // TODO: figure out how to alert state response/status
 
     }
+
+  private void setUserId() {
+    String userId = ((EditText)getView().findViewById(R.id.userIdKey)).getText().toString();
+    Leanplum.setUserId(userId.trim());
+  }
+
+  private void forceContentUpdate() {
+    Leanplum.forceContentUpdate();
+  }
 
     private void setDeviceLocation() {
         Float latitude = Float.parseFloat(
@@ -122,6 +141,22 @@ public class AdhocFragment extends Fragment {
                         setDeviceLocation();
                     }
                 });
+
+        getView().findViewById(R.id.buttonUserId)
+            .setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                setUserId();
+              }
+            });
+
+        getView().findViewById(R.id.buttonForceContentUpdate)
+            .setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                forceContentUpdate();
+              }
+            });
 /*
         findViewById(R.id.buttonPlacePicker)
                 .setOnClickListener(new View.OnClickListener() {

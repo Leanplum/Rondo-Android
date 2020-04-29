@@ -1,5 +1,6 @@
 package com.leanplum.rondo;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
@@ -65,7 +66,9 @@ public class PushActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String url = "https://www.leanplum.com/api?action=addAndroidNotificationChannel\n";
+                final String url = "https://"
+                        + InternalState.sharedState().getEnv().getApiHostName()
+                        + "/api?action=addAndroidNotificationChannel\n";
                 final Map<String, String> params = new HashMap<>();
                 InternalState state = InternalState.sharedState();
                 params.put("appId", state.getApp().getAppId());
@@ -113,23 +116,42 @@ public class PushActivity extends AppCompatActivity {
             int responseCode=conn.getResponseCode();
 
             if (responseCode == HttpsURLConnection.HTTP_OK) {
-                Toast.makeText(this, "Success!",
-                        Toast.LENGTH_LONG).show();
+                final Context context = this;
                 String line;
                 BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 while ((line=br.readLine()) != null) {
                     response+=line;
                 }
+                final String displayText = "Success, channel created. " +
+                        "200 received from server!";
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(context, displayText, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
             else {
-                Toast.makeText(this, "Error!",
-                        Toast.LENGTH_LONG).show();
-                response="";
+                final Context context = this;
+                String line;
+                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line=br.readLine()) != null) {
+                    response+=line;
+                }
+                final String displayText = response;
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(context, displayText, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Error!",
-                    Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+            final Context context = this;
+            final String displayText = e.getMessage();
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(context, displayText, Toast.LENGTH_LONG).show();
+                }
+            });
         }
 
         return response;
