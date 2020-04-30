@@ -153,6 +153,7 @@ captures/
 # Intellij
 *.iml
 .idea/workspace.xml
+.idea/modules.xml
 
 # Keystore files
 *.jks
