@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
-def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "5.4.0"
+def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "5.4.1"
 
 android {
 
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.leanplum.rondo"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -41,7 +41,7 @@ dependencies {
 
     //External Dependencies
     implementation "com.google.android.gms:play-services-location:17.0.0"
-    implementation 'com.google.firebase:firebase-messaging:20.0.1' // for FCM
+    implementation 'com.google.firebase:firebase-messaging:20.2.0' // for FCM
 //    implementation "com.google.android.gms:play-services-gcm:11.8+" // for GCM
 
     // Released Packages
@@ -57,10 +57,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.google.android.gms:play-services-places:17.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
