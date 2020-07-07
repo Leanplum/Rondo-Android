@@ -1,8 +1,11 @@
 package com.leanplum.rondo;
 
 import android.app.Application;
+import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
+import androidx.multidex.MultiDex;
 import com.google.firebase.FirebaseApp;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
@@ -77,4 +80,10 @@ public class RondoApplication extends Application {
         Leanplum.start(this);
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+            MultiDex.install(this); // enable multiDex for older devices
+    }
 }

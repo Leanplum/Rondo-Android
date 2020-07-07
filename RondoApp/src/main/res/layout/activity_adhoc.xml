@@ -85,6 +85,22 @@
                 android:layout_width="fill_parent"
                 android:textSize="16dp">
             </EditText>
+            <EditText
+                android:id="@+id/stateParamKey"
+                android:layout_height="wrap_content"
+                android:hint="State Parameter Key (String)"
+                android:inputType="textNoSuggestions"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </EditText>
+            <EditText
+                android:id="@+id/stateParamValue"
+                android:layout_height="wrap_content"
+                android:hint="State Parameter Value (String)"
+                android:inputType="textNoSuggestions"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </EditText>
             <Button
                 android:id="@+id/buttonState"
                 android:layout_height="wrap_content"

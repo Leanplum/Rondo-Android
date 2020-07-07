@@ -10,13 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leanplum.Var;
-import com.leanplum.annotations.File;
 
 public class VariablesFragment extends Fragment {
     Var<String> varString = Var.define("var_text", "Default value in code");
     Var<Number> varNumber = Var.define("var_number", null);
     Var<Boolean> varBoolean = Var.define("var_bool", false);
-    Var<File> varFile = Var.define("var_file", null);
+    Var<String> varFile = Var.defineFile("var_file", null);
 
 
 

@@ -7,12 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leanplum.Var;
-import com.leanplum.annotations.File;
 
 public class VariablesActivity extends AppCompatActivity {
     Var<String> composerName = Var.define("composerName", "Composer name");
     Var<String> compositionTitle = Var.define("compositionTitle", "Composition Title");
-    Var<File> photoFile = Var.define("photograph", null);
+    Var<String> photoFile = Var.defineFile("photograph", null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

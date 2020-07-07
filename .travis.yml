@@ -1,27 +1,48 @@
 language: android
-android:
-  components:
-  - tools
-  - platform-tools
-  - tools
-  - build-tools-28.0.3
-  - android-28
+
+env:
+  global:
+    - BUILD_API=29
+    - BUILD_TOOLS=29.0.3
+    - ANDROID_HOME=/usr/local/android-sdk
+    - TOOLS=${ANDROID_HOME}/tools
+    # PATH order is important, the 'emulator' script exists in more than one place
+    - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
+
 jdk:
   - oraclejdk8
-# blocklist
+
+android:
+  components:
+    - tools
+
+licenses:
+  - 'android-sdk-preview-license-.+'
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
+
+before_script:
+  # Install Android SDK
+  - echo 'count=0' > /home/travis/.android/repositories.cfg # avoid harmless sdkmanager warning
+  - echo y | sdkmanager "platform-tools" >/dev/null
+  - echo y | sdkmanager "tools" >/dev/null
+  - echo y | sdkmanager "build-tools;$BUILD_TOOLS" >/dev/null
+  - echo y | sdkmanager "platforms;android-$BUILD_API" >/dev/null
+  - echo y | sdkmanager "extras;android;m2repository" >/dev/null
+
 branches:
   except:
   - /^untagged/
 script:
   - "./gradlew test"
 before_deploy:
-  - "./gradlew assembleDebug"
+  - "./gradlew assembleRelease"
 deploy:
   provider: releases
   edge: true
   api_key:
     secure: JGUL8WHvwYVtrsYEXXyAGXCKGeRpf0sScTIbuT2kyhS/nWM2hIyY5t06V89qS2V6a1LuVz7Iq4kZgioSaEMfLpUyytM/ozuMYUS9ETG8lHvPXItajn8ytsN8gh2Pw8uMh8s54EFh0v4FCAahLtAoyyILfxNO7aeKRwmcZIK/j87g66DeXgH0ZXJXFwmJMNg9FV0jwlK5HHDmTeo4lk1IzuqUN4B11KbQCdZKW7y6gJGhJypU4Y2gL+bOA79c7BL+C71TPtw8D81lrqVWbegziV3SNSfA5lkY2obiV4lVwovL88ZO4Rrq7y7MgneNUSFqI5rfKUEEyMZvLHbqdRRX9IeHJiWGdyV7kJ72ZmkLlPDnbcA5r+GK14aOoEXkmD827MxMHHDhmVQYyV4A8HBU112ERdYlFx0xqpWi5yhYHa4dQqcTWU526/jy/KjH7uqI+M3miNk3w4mIvUEX7Ret1p2Gv/HL0nQFkwv4kMkxkJCwxtUtR1n+tp7X1gBO32BNu18cCqSh3/qDU5+kRzDeTJAF3Qf1ij6nrwH66/4NoYcmcZ1dOwJ7vCX4cd1tuvoFZM6o/00YOt8VCyz9CszvxE+PHrr/A6zDdaO3FusA1HrHFfnnLUIlxjE1zprlODruf9GDv/PlpqnGj2IcZZeag7tDDldVUPhDVEWAeMqFZD8=
-  file: "RondoApp/build/outputs/apk/debug/RondoApp-debug.apk"
+  file: "RondoApp/build/outputs/apk/release/RondoApp-release.apk"
   name: "Android SDK $LEANPLUM_SDK_VERSION"
   tag: "$LEANPLUM_SDK_VERSION"
   on:

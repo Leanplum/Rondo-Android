@@ -1,5 +1,6 @@
 package com.leanplum.rondo;
 
+import android.text.TextUtils;
 import androidx.fragment.app.Fragment;;
 import android.content.Intent;
 import android.location.Location;
@@ -59,8 +60,18 @@ public class AdhocFragment extends Fragment {
 
     private void sendState() {
         String stateName = ((EditText)getView().findViewById(R.id.stateName))
-                .getText().toString();
-        Leanplum.track(stateName.trim());
+                .getText().toString().trim();
+        String paramKey = ((EditText)getView().findViewById(R.id.stateParamKey))
+                .getText().toString().trim();
+        String paramValue = ((EditText)getView().findViewById(R.id.stateParamValue))
+                .getText().toString().trim();
+        Map<String, String> params = new HashMap<>();
+        if (!TextUtils.isEmpty(paramKey) && !TextUtils.isEmpty(paramValue)) {
+            params.put(paramKey, paramValue);
+            Leanplum.advanceTo(stateName, params);
+        } else {
+            Leanplum.advanceTo(stateName);
+        }
         // TODO: figure out how to alert state response/status
 
         persistence.saveState(stateName);
