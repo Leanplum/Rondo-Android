@@ -14,8 +14,8 @@ public class LeanplumEnvPersistence {
     private static final String ENV_STAGING = "leanplum-staging.appspot.com";
     private static final String ENV_STAGING_SOCKET = "dev-staging.leanplum.com";
 
-    private static final String ENV_QA = "leanplum-qa-1372.appspot.com";
-    private static final String ENV_QA_SOCKET = "dev-qa-1372.leanplum.com";
+    private static final String ENV_QA = "api-qa.leanplum.com";
+    private static final String ENV_QA_SOCKET = "dev-qa.leanplum.com";
 
     private static final int SOCKET_PORT = 443;
     private static final boolean API_USE_SSL = true;

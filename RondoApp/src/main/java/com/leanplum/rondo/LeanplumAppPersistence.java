@@ -14,7 +14,7 @@ public class LeanplumAppPersistence {
     private static final String APP_RONDO_QA_PRODUCTION_PRODKEY = "prod_D5ECYBLrRrrOYaFZvAFFHTg1JyZ2Llixe5s077Lw3rM";
 
     private static final String APP_RONDO_QA_AUTOMATION = "Rondo QA Automation";
-    private static final String APP_RONDO_QA_AUTOMATION_ID = "app_UQcFGVeXzOCVsovrlUebad9R67hFJqzDegfQPZRnVZMn";
+    private static final String APP_RONDO_QA_AUTOMATION_ID = "app_UQcFGVeXzOCVsovrlUebad9R67hFJqzDegfQPZRnVZM";
     private static final String APP_RONDO_QA_AUTOMATION_DEVKEY = "dev_b9qX0tcazL5PCQFuZ7pxsfT6XHA7xQkaFtYVrgt4Kq0";
     private static final String APP_RONDO_QA_AUTOMATION_PRODKEY = "prod_lL8RSFzmHy0iVYXQpzjUVEHDlaUz5idT0H7BVs6Bn1Q";
 
