@@ -30,42 +30,9 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <receiver
-            android:name="com.leanplum.LeanplumPushReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.leanplum.LeanplumPushListenerService" />
-
-                <category android:name="com.leanplum.rondo" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="com.leanplum.LeanplumPushListenerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-                <category android:name="com.leanplum.rondo" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="com.leanplum.LeanplumPushInstanceIDService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
-
-                <category android:name="com.leanplum.rondo" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="com.leanplum.LeanplumPushRegistrationService"
-            android:exported="false" />
 
         <activity
             android:name=".TriggersActivity"
