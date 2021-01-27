@@ -56,6 +56,7 @@ dependencies {
     implementation project(':AndroidSDKPush')
     implementation project(':AndroidSDKLocation')
     implementation project(':AndroidSDKFcm')
+    implementation project(':AndroidSDKMiPush')
 //    implementation project(':AndroidSDKGcm')
 
 //    implementation "com.leanplum:leanplum-monitoring:+"
