@@ -11,7 +11,7 @@ public class LeanplumEnvPersistence {
     private static final String ENV_PRODUCTION = "api.leanplum.com";
     private static final String ENV_PRODUCTION_SOCKET = "dev.leanplum.com";
 
-    private static final String ENV_STAGING = "leanplum-staging.appspot.com";
+    private static final String ENV_STAGING = "api-staging.leanplum.com";
     private static final String ENV_STAGING_SOCKET = "dev-staging.leanplum.com";
 
     private static final String ENV_QA = "api-qa.leanplum.com";
