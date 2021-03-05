@@ -36,6 +36,13 @@ android {
     }
 }
 
+static def isMiPushSupported(version) {
+    // MiPush is supported from 5.6.0
+    String major = version.split("\\.")[0]
+    String minor = version.split("\\.")[1]
+    return (major.toInteger() >= 5 && minor.toInteger() >= 6)
+}
+
 dependencies {
 
     //External Dependencies
@@ -48,7 +55,10 @@ dependencies {
 //    implementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
 //    implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
 //    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
-////    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
+//    if (isMiPushSupported(LEANPLUM_SDK_VERSION)) {
+//        println "adding leanplum-mipush dependency"
+//        implementation "com.leanplum:leanplum-mipush:${LEANPLUM_SDK_VERSION}"
+//    }
 
     // Source
     implementation project(':AndroidSDK')
