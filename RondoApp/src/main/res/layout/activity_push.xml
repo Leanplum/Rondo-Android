@@ -9,13 +9,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/createChannel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create Channel"
-            android:textSize="14dp"
-            />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+            <Button
+                android:id="@+id/createChannel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Channel"
+                android:textSize="14sp"
+                />
+
+            <Button
+              android:id="@+id/muteChannel"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Mute Channel"
+              android:textSize="14sp"
+              />
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/channels"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:visibility="gone"
+          android:padding="20dp">
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="20dp"
+              android:text="Channel can be muted programmatically only once.\nCannot be muted if user has changed it."/>
+        </LinearLayout>
+
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"

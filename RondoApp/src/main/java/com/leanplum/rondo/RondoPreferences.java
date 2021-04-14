@@ -36,7 +36,7 @@ public class RondoPreferences extends RealmObject {
         Realm realm = Realm.getDefaultInstance();
         RondoPreferences rondoPreferences = realm.where(RondoPreferences.class).findFirst();
         if (rondoPreferences == null) {
-            LeanplumApp app = LeanplumAppPersistence.rondoQAProduction();
+            LeanplumApp app = LeanplumAppPersistence.rondoAutomation();
             LeanplumEnv env = LeanplumEnvPersistence.production();
 
             realm.beginTransaction();
