@@ -10,6 +10,7 @@ import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.annotations.Parser;
 import com.leanplum.callbacks.StartCallback;
+import com.leanplum.internal.Log.Level;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 
@@ -32,6 +33,7 @@ public class RondoApplication extends Application {
 
         FirebaseApp.initializeApp(this);
 
+        Leanplum.setLogLevel(Level.DEBUG);
         Leanplum.setApplicationContext(this);
 
         Parser.parseVariables(this);
