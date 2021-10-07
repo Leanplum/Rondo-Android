@@ -2,15 +2,16 @@ language: android
 
 env:
   global:
-    - BUILD_API=30
-    - BUILD_TOOLS=30.0.3
+    - JAVA_TOOL_OPTIONS=-Dhttps.protocols=TLSv1.2
+    - BUILD_API=31
+    - BUILD_TOOLS=31.0.0
     - ANDROID_HOME=/usr/local/android-sdk
-    - TOOLS=${ANDROID_HOME}/tools
+    - TOOLS=${ANDROID_HOME}/cmdline-tools/latest
     # PATH order is important, the 'emulator' script exists in more than one place
     - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
 
 jdk:
-  - oraclejdk8
+  - oraclejdk11
 
 android:
   components:
@@ -21,14 +22,21 @@ licenses:
   - 'android-sdk-license-.+'
   - 'google-gdk-license-.+'
 
+before_install:
+  # Install cmdline-tools (older tools doesn't support Java 11)
+  - wget -q "https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip" -O android-commandline-tools-linux.zip
+  - mkdir -p ${ANDROID_HOME}/cmdline-tools
+  - unzip -q android-commandline-tools-linux.zip -d ${ANDROID_HOME}/cmdline-tools
+  - mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest
+
 before_script:
   # Install Android SDK
   - echo 'count=0' > /home/travis/.android/repositories.cfg # avoid harmless sdkmanager warning
-  - echo y | sdkmanager "platform-tools" >/dev/null
-  - echo y | sdkmanager "tools" >/dev/null
-  - echo y | sdkmanager "build-tools;$BUILD_TOOLS" >/dev/null
-  - echo y | sdkmanager "platforms;android-$BUILD_API" >/dev/null
-  - echo y | sdkmanager "extras;android;m2repository" >/dev/null
+  - echo y | ${TOOLS}/bin/sdkmanager "platform-tools" >/dev/null
+  - echo y | ${TOOLS}/bin/sdkmanager "tools" >/dev/null
+  - echo y | ${TOOLS}/bin/sdkmanager "build-tools;$BUILD_TOOLS" >/dev/null
+  - echo y | ${TOOLS}/bin/sdkmanager "platforms;android-$BUILD_API" >/dev/null
+  - echo y | ${TOOLS}/bin/sdkmanager "extras;android;m2repository" >/dev/null
 
 branches:
   except:
