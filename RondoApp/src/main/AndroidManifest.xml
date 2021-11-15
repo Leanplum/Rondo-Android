@@ -80,6 +80,23 @@
             </intent-filter>
         </activity>
 
+        <!-- Disable the default Leanplum FCM message handling service -->
+        <service
+          xmlns:tools="http://schemas.android.com/tools"
+          android:name="com.leanplum.LeanplumPushFirebaseMessagingService"
+          android:enabled="false"
+          tools:replace="android:enabled"/>
+
+        <!-- Add your custom FCM message handling service -->
+        <service
+          android:name=".Custom_PushFirebaseMessagingService"
+          android:enabled="true"
+          android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
