@@ -22,6 +22,12 @@ if (new File('../Leanplum-Android-SDK').exists()) {
         project(':AndroidSDKMiPush').projectDir = miPushDir
     }
 
+    def hmsDir = new File('../Leanplum-Android-SDK/AndroidSDKHms')
+    if (hmsDir.exists()) {
+        include ':AndroidSDKHms'
+        project(':AndroidSDKHms').projectDir = hmsDir
+    }
+
     include ':AndroidSDKLocation'
     project(':AndroidSDKLocation').projectDir = new File('../Leanplum-Android-SDK/AndroidSDKLocation')
 

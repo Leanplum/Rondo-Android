@@ -2,8 +2,17 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.huawei.agconnect'
 
-def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "5.7.0"
+def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "5.8.1"
+
+def KEYSTORE_PATH_PROP = 'storeFilePath'
+def KEYSTORE_PASSWORD_PROP = 'storePassword'
+def KEYSTORE_KEYALIAS_PROP = 'keyAlias'
+def KEYSTORE_KEYPASS_PROP = 'keyPassword'
+
+def signingProperties = getSigningProperties()
 
 android {
 
@@ -18,13 +27,32 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
-    buildTypes {
 
+    if (signingProperties.containsKey(KEYSTORE_PATH_PROP)) {
+        signingConfigs {
+            release {
+                storeFile file(signingProperties[KEYSTORE_PATH_PROP])
+                storePassword signingProperties[KEYSTORE_PASSWORD_PROP]
+                keyAlias signingProperties[KEYSTORE_KEYALIAS_PROP]
+                keyPassword signingProperties[KEYSTORE_KEYPASS_PROP]
+            }
+            debug {
+                storeFile file(signingProperties[KEYSTORE_PATH_PROP])
+                storePassword signingProperties[KEYSTORE_PASSWORD_PROP]
+                keyAlias signingProperties[KEYSTORE_KEYALIAS_PROP]
+                keyPassword signingProperties[KEYSTORE_KEYPASS_PROP]
+            }
+        }
+    } else {
+        println "Signing properties missing"
+    }
+
+    buildTypes {
         buildTypes.each {
             it.buildConfigField "String", "LEANPLUM_SDK_VERSION", "\"${LEANPLUM_SDK_VERSION}\""
         }
         release {
-            signingConfig signingConfigs.debug // sign with debug key (only for QA purposes)
+            signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -63,6 +91,35 @@ static def isMiPushSupported(version) {
             (major.toInteger() == startMajor && minor.toInteger() >= startMinor)
 }
 
+static def isHmsSupported(String version) {
+    // HMS is supported from 5.9.0
+    int startMajor = 5
+    int startMinor = 9
+    String major = version.split("\\.")[0]
+    String minor = version.split("\\.")[1]
+    return major.toInteger() > startMajor ||
+            (major.toInteger() == startMajor && minor.toInteger() >= startMinor)
+}
+
+def getSigningProperties() {
+    boolean isRunningOnTravis = System.getenv('CI') == 'true'
+    if (isRunningOnTravis) {
+        println 'Using Travis CI for signing properties'
+        Properties properties = new Properties()
+        properties.put(KEYSTORE_PATH_PROP, '../keystore/signingkey.jks')
+        properties.put(KEYSTORE_PASSWORD_PROP, System.getenv('keystore_password'))
+        properties.put(KEYSTORE_KEYALIAS_PROP, System.getenv('keystore_alias'))
+        properties.put(KEYSTORE_KEYPASS_PROP, System.getenv('keystore_alias_password'))
+        return properties
+    } else {
+        println 'Using local.properties for signing properties'
+        InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+        Properties properties = new Properties()
+        properties.load(inputStream)
+        return properties
+    }
+}
+
 dependencies {
 
     //External Dependencies
@@ -78,6 +135,10 @@ dependencies {
         println "adding leanplum-mipush dependency"
         prodImplementation "com.leanplum:leanplum-mipush:${LEANPLUM_SDK_VERSION}"
     }
+    if (isHmsSupported(LEANPLUM_SDK_VERSION)) {
+        println "adding leanplum-hms dependency"
+        prodImplementation "com.leanplum:leanplum-hms:${LEANPLUM_SDK_VERSION}"
+    }
 
     // SDK from source (dev flavor)
     if (findProject(':AndroidSDK') != null) {
@@ -87,6 +148,9 @@ dependencies {
         devImplementation project(':AndroidSDKFcm')
         if (findProject(':AndroidSDKMiPush') != null) {
             devImplementation project(':AndroidSDKMiPush')
+        }
+        if (findProject(':AndroidSDKHms') != null) {
+            devImplementation project(':AndroidSDKHms')
         }
     }
 
@@ -107,5 +171,3 @@ dependencies {
     // Json canonicalization for Variable Signing
     implementation 'io.github.erdtman:java-json-canonicalization:1.1'
 }
-
-apply plugin: 'com.google.gms.google-services'

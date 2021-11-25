@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.leanplum.rondo">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,6 +25,23 @@
     <uses-permission android:name="com.leanplum.rondo.permission.MIPUSH_RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- /MiPush -->
+
+    <!-- Huawei Messaging Service -->
+    <!-- Some of the libraries need newer than 16 targetSDK, overriding minSDK for them to not -->
+    <!-- change targetSDK of Rondo to allow usage with smaller Android version without using HMS-->
+    <uses-sdk tools:overrideLibrary="
+        com.leanplum.hms,
+        com.huawei.hms.log,
+        com.huawei.hms.base.availableupdate,
+        com.huawei.hms.base.ui,
+        com.huawei.hms.hatool,
+        com.huawei.hms.stats,
+        com.huawei.hms.base.device,
+        com.huawei.android.hms.base,
+        com.huawei.android.hms.push,
+        com.huawei.android.hms.openid
+    "/>
+    <!-- /Huawei Messaging Service -->
 
     <meta-data
         android:name="com.google.android.geo.API_KEY"
@@ -81,7 +100,6 @@
         </activity>
 
         <activity
-          xmlns:tools="http://schemas.android.com/tools"
           android:name="com.journeyapps.barcodescanner.CaptureActivity"
           tools:replace="android:screenOrientation"
           android:screenOrientation="sensor" />
