@@ -29,6 +29,7 @@ before_install:
   - unzip -q android-commandline-tools-linux.zip -d ${ANDROID_HOME}/cmdline-tools
   - mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest
   # Decrypt keystore
+  - mkdir -p keystore
   - openssl aes-256-cbc -K $encrypted_3e25ea35f95b_key -iv $encrypted_3e25ea35f95b_iv -in signingkey.jks.enc -out keystore/signingkey.jks -d
 
 before_script:
