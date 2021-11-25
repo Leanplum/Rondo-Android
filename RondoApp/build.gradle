@@ -7,10 +7,12 @@ apply plugin: 'com.huawei.agconnect'
 
 def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "5.8.1"
 
-def KEYSTORE_PATH_PROP = 'storeFilePath'
-def KEYSTORE_PASSWORD_PROP = 'storePassword'
-def KEYSTORE_KEYALIAS_PROP = 'keyAlias'
-def KEYSTORE_KEYPASS_PROP = 'keyPassword'
+ext {
+    KEYSTORE_PATH_PROP = 'storeFilePath'
+    KEYSTORE_PASSWORD_PROP = 'storePassword'
+    KEYSTORE_KEYALIAS_PROP = 'keyAlias'
+    KEYSTORE_KEYPASS_PROP = 'keyPassword'
+}
 
 def signingProperties = getSigningProperties()
 
