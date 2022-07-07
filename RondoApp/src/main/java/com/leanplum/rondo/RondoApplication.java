@@ -9,8 +9,8 @@ import com.google.firebase.FirebaseApp;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.annotations.Parser;
-import com.leanplum.callbacks.StartCallback;
 import com.leanplum.internal.Log.Level;
+import com.leanplum.messagetemplates.MessageTemplates;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 
@@ -82,6 +82,7 @@ public class RondoApplication extends Application {
 
         initMiPushApp();
 
+        MessageTemplates.setCustomizer(new MyDialogCustomizer());
         Leanplum.start(this);
     }
 
