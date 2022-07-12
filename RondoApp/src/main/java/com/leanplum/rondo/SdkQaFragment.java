@@ -35,6 +35,7 @@ public class SdkQaFragment extends Fragment {
         createTriggersButton();
         createMessagesButton();
         createPushButton();
+        createQueueButton();
     }
 
     @Override
@@ -88,6 +89,14 @@ public class SdkQaFragment extends Fragment {
                 Intent myIntent = new Intent(getActivity(), PushActivity.class);
                 startActivity(myIntent);
             }
+        });
+    }
+
+    private void createQueueButton() {
+        Button button = getView().findViewById(R.id.queue);
+        button.setOnClickListener(v -> {
+            Intent myIntent = new Intent(getActivity(), QueueActivity.class);
+            startActivity(myIntent);
         });
     }
 }

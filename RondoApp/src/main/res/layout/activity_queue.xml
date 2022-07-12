@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="14dp">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <CheckBox
+      android:id="@+id/pauseQueue"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Pause Queue" />
+    <CheckBox
+      android:id="@+id/disableQueue"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Disable Queue" />
+    <CheckBox
+      android:id="@+id/dismissOnPushOpened"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Dismiss on Push Opened" />
+    <CheckBox
+      android:id="@+id/continueOnActivityResume"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Continue on Activity Resume" />
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="Queue:" />
+      <Button
+        android:id="@+id/showQueue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JSON"
+        android:textSize="14sp" />
+    </LinearLayout>
+
+
+
+    <androidx.appcompat.widget.SwitchCompat
+      android:id="@+id/controllerSwitch"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Controller"
+      android:checked="true"
+      android:textOn="Use controller"
+      android:textOff="Do not use controller" />
+
+    <LinearLayout
+      android:id="@+id/controllerGroup"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="shouldDisplayMessages:" />
+
+      <RadioGroup
+        android:id="@+id/radioGroupDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton
+          android:id="@+id/radioShow"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Show"/>
+        <RadioButton
+          android:id="@+id/radioDiscard"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Discard"/>
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+          <RadioButton
+            android:id="@+id/radioDelay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delay Seconds:"/>
+          <EditText
+            android:id="@+id/delaySeconds"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="5" />
+        </LinearLayout>
+        <RadioButton
+          android:id="@+id/radioDelayeIndefinitely"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Delay Indefinitely"/>
+        <RadioButton
+          android:id="@+id/radioDisplayNone"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="None"/>
+      </RadioGroup>
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="14dp"
+          android:text="Delayed Messages:" />
+        <Button
+          android:id="@+id/triggerDelayedMessages"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Trigger"
+          android:textSize="14sp" />
+        <Button
+          android:id="@+id/showDelayedMessages"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="JSON"
+          android:textSize="14sp" />
+      </LinearLayout>
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="prioritizeMessages:" />
+      <RadioGroup
+        android:id="@+id/radioGroupPrioritize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton
+          android:id="@+id/radioOnlyFirst"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Only first"/>
+        <RadioButton
+          android:id="@+id/radioAllReversed"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="All reversed"/>
+        <RadioButton
+          android:id="@+id/radioPrioritizeNone"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="None"/>
+      </RadioGroup>
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.SwitchCompat
+      android:id="@+id/listenerSwitch"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Listener"
+      android:checked="true"
+      android:textOn="Use listener"
+      android:textOff="Do not use listener" />
+
+    <LinearLayout
+      android:id="@+id/listenerGroup"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="Track Events:" />
+      <CheckBox
+        android:id="@+id/trackOnMessageDisplayed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="onMessageDisplayed" />
+      <CheckBox
+        android:id="@+id/trackOnMessageDismissed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="onMessageDismissed" />
+      <CheckBox
+        android:id="@+id/trackOnActionExecuted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="onActionExecuted" />
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+          android:id="@+id/showEvents"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="JSON"
+          android:textSize="14sp" />
+        <Button
+          android:id="@+id/resetEvents"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Reset Events"
+          android:textSize="14sp" />
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+</ScrollView>

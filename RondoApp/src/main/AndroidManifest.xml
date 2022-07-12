@@ -77,6 +77,9 @@
             android:name=".PushActivity"
             android:label="Push Notifications"/>
         <activity
+            android:name=".QueueActivity"
+            android:label="Action Queue"/>
+        <activity
             android:name=".LeanplumAppPickerActivity"
             android:label="Pick App"/>
         <activity
