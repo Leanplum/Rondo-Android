@@ -14,21 +14,25 @@
       android:id="@+id/pauseQueue"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:onClick="onCheckboxClicked"
       android:text="Pause Queue" />
     <CheckBox
       android:id="@+id/disableQueue"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:onClick="onCheckboxClicked"
       android:text="Disable Queue" />
     <CheckBox
       android:id="@+id/dismissOnPushOpened"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:onClick="onCheckboxClicked"
       android:text="Dismiss on Push Opened" />
     <CheckBox
       android:id="@+id/continueOnActivityResume"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:onClick="onCheckboxClicked"
       android:text="Continue on Activity Resume" />
 
     <LinearLayout
@@ -46,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="JSON"
+        android:onClick="onButtonClicked"
         android:textSize="14sp" />
     </LinearLayout>
 
@@ -88,26 +93,31 @@
             android:id="@+id/radioDisplayNone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:text="None"/>
           <RadioButton
             android:id="@+id/radioShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:text="Show"/>
           <RadioButton
             android:id="@+id/radioDiscard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:text="Discard"/>
           <RadioButton
-            android:id="@+id/radioDelayeIndefinitely"
+            android:id="@+id/radioDelayIndefinitely"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:text="Delay Indefinitely"/>
           <RadioButton
             android:id="@+id/radioDelay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:text="Delay Seconds:"/>
         </RadioGroup>
         <EditText
@@ -136,12 +146,14 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="JSON"
+          android:onClick="onButtonClicked"
           android:textSize="14sp" />
         <Button
           android:id="@+id/triggerDelayedMessages"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Trigger"
+          android:onClick="onButtonClicked"
           android:textSize="14sp" />
       </LinearLayout>
       <TextView
@@ -158,16 +170,19 @@
           android:id="@+id/radioPrioritizeNone"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:onClick="onRadioButtonClicked"
           android:text="None"/>
         <RadioButton
           android:id="@+id/radioOnlyFirst"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:onClick="onRadioButtonClicked"
           android:text="Only first"/>
         <RadioButton
           android:id="@+id/radioAllReversed"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:onClick="onRadioButtonClicked"
           android:text="All reversed"/>
       </RadioGroup>
     </LinearLayout>
@@ -183,6 +198,7 @@
       android:layout_marginTop="20dp"
       android:layout_marginBottom="20dp"
       android:checked="true"
+      android:onClick="onCheckboxClicked"
       android:textOn="Use listener"
       android:textOff="Do not use listener" />
 
@@ -201,16 +217,19 @@
         android:id="@+id/trackOnMessageDisplayed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
         android:text="onMessageDisplayed" />
       <CheckBox
         android:id="@+id/trackOnMessageDismissed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
         android:text="onMessageDismissed" />
       <CheckBox
         android:id="@+id/trackOnActionExecuted"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
         android:text="onActionExecuted" />
 
       <LinearLayout
@@ -228,12 +247,14 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="JSON"
+          android:onClick="onButtonClicked"
           android:textSize="14sp" />
         <Button
           android:id="@+id/resetEvents"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Reset Events"
+          android:onClick="onButtonClicked"
           android:textSize="14sp" />
       </LinearLayout>
 
