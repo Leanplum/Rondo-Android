@@ -10,7 +10,6 @@ import com.leanplum.ActionContext;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.callbacks.ActionCallback;
-import com.leanplum.callbacks.PostponableAction;
 
 /**
  * Registers a Leanplum action that show the app rating flow for Google Play Store.
@@ -27,22 +26,23 @@ public class AppRating {
         new ActionCallback() {
           @Override
           public boolean onResponse(ActionContext context) {
-            LeanplumActivityHelper.queueActionUponActive(
-                new PostponableAction() {
-                  @Override
-                  public void run() {
-                    requestAppRating();
-                  }
-                });
+            return requestAppRating();
+          }
+        },
+        new ActionCallback() {
+          @Override
+          public boolean onResponse(ActionContext context) {
+            // rating flow can't be stopped
             return true;
           }
-        });
+        }
+    );
   }
 
-  private static void requestAppRating() {
+  private static boolean requestAppRating() {
     Activity activity = LeanplumActivityHelper.getCurrentActivity();
     if (activity == null || activity.isFinishing())
-      return;
+      return false;
 
     ReviewManager manager = ReviewManagerFactory.create(activity);
     Task<ReviewInfo> request = manager.requestReviewFlow();
@@ -60,5 +60,6 @@ public class AppRating {
         // reviewed or not, or even whether the review dialog was shown.
       });
     });
+    return true;
   }
 }
