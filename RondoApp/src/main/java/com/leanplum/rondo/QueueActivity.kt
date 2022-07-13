@@ -21,6 +21,11 @@ class QueueActivity : AppCompatActivity() {
     initListener()
   }
 
+  override fun onResume() {
+    super.onResume()
+    pauseQueueView().isChecked = LeanplumActions.isQueuePaused()
+  }
+
   private fun initCheckBoxes() {
     pauseQueueView().isChecked = LeanplumActions.isQueuePaused()
     disableQueueView().isChecked = !LeanplumActions.isQueueEnabled()
@@ -102,7 +107,7 @@ class QueueActivity : AppCompatActivity() {
 
       onlyFirstRadioButton() -> prioritizationChoice = PrioritizationType.ONLY_FIRST
       allReversedRadioButton() -> prioritizationChoice = PrioritizationType.ALL_REVERSED
-      prioritizeNoneRadioButton() -> prioritizationChoice = PrioritizationType.ONLY_FIRST
+      prioritizeNoneRadioButton() -> prioritizationChoice = null
     }
   }
 

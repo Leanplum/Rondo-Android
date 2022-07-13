@@ -36,6 +36,8 @@ public class RondoApplication extends Application {
         Leanplum.setLogLevel(Level.DEBUG);
         Leanplum.setApplicationContext(this);
 
+        QueueActivityModel.INSTANCE.setListenerEnabled(true);
+
         Parser.parseVariables(this);
         LeanplumActivityHelper.enableLifecycleCallbacks(this);
 

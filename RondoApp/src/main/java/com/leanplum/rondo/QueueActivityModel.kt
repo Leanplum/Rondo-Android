@@ -80,12 +80,13 @@ object QueueActivityModel {
     }
   }
 
-  var listenerEnabled = true // TODO register listener on another level?
+  var listenerEnabled = false
   set(value) {
     field = value
     if (value) {
       LeanplumActions.setMessageDisplayListener(MessageDisplayListenerObject)
     } else {
+      resetEvents()
       LeanplumActions.setMessageDisplayListener(null)
     }
   }
