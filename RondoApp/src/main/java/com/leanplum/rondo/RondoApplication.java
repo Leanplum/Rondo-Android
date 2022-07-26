@@ -47,6 +47,10 @@ public class RondoApplication extends Application {
 
         setUpInitialAppState();
         initLeanplum();
+
+        // This code could be moved inside LP SDK
+
+        CleverTapUtil.INSTANCE.initialize(this);
     }
 
     private void setUpInitialAppState() {

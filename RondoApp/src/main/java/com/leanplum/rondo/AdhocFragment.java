@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.clevertap.android.sdk.CleverTapAPI;
 import com.leanplum.Leanplum;
 
 import java.util.HashMap;
@@ -52,10 +53,21 @@ public class AdhocFragment extends Fragment {
 
         if (TextUtils.isEmpty(paramKey) && isDouble(paramValue)) {
           Leanplum.track(eventName.trim(), Double.parseDouble(paramValue));
+
+          CleverTapAPI api = CleverTapAPI.getDefaultInstance(getContext());
+          api.pushEvent(eventName.trim());
+
         } else if (paramKey != null && paramValue != null) {
             Leanplum.track(eventName.trim(), params);
+
+          CleverTapAPI api = CleverTapAPI.getDefaultInstance(getContext());
+          api.pushEvent(eventName.trim());
+
         } else {
             Leanplum.track(eventName.trim());
+
+          CleverTapAPI api = CleverTapAPI.getDefaultInstance(getContext());
+          api.pushEvent(eventName.trim());
         }
         // TODO: figure out how to alert event response/status
 

@@ -13,10 +13,14 @@ public class LeanplumAppPersistence {
     private static final String APP_RONDO_QA_PRODUCTION_DEVKEY = "dev_cKF5HMpLGqhbovlEGMKjgTuf8AHfr2Jar6rrnNhtzQ0";
     private static final String APP_RONDO_QA_PRODUCTION_PRODKEY = "prod_D5ECYBLrRrrOYaFZvAFFHTg1JyZ2Llixe5s077Lw3rM";
 
-    private static final String APP_RONDO_AUTOMATION = "Rondo Automation";
-    private static final String APP_RONDO_AUTOMATION_ID = "app_UQcFGVeXzOCVsovrlUebad9R67hFJqzDegfQPZRnVZM";
-    private static final String APP_RONDO_AUTOMATION_DEVKEY = "dev_b9qX0tcazL5PCQFuZ7pxsfT6XHA7xQkaFtYVrgt4Kq0";
-    private static final String APP_RONDO_AUTOMATION_PRODKEY = "prod_lL8RSFzmHy0iVYXQpzjUVEHDlaUz5idT0H7BVs6Bn1Q";
+    private static final String APP_RONDO_AUTOMATION = "Hristo CT App";
+    private static final String APP_RONDO_AUTOMATION_ID = "app_GTIeRPAqyKfmuj11zhPheb3EBhIvFEcZzth8wJ3QYmQ";
+    private static final String APP_RONDO_AUTOMATION_DEVKEY = "dev_DpcDpx0DCdDHQwewdA6muwMV3BoKBDR0ZVeAnE9tRbw";
+    private static final String APP_RONDO_AUTOMATION_PRODKEY = "prod_42ZelbTKlpDnPhnWAs5tyooJL8vmCFn5DlA5t7XDq4I";
+//    private static final String APP_RONDO_AUTOMATION = "Rondo Automation";
+//    private static final String APP_RONDO_AUTOMATION_ID = "app_UQcFGVeXzOCVsovrlUebad9R67hFJqzDegfQPZRnVZM";
+//    private static final String APP_RONDO_AUTOMATION_DEVKEY = "dev_b9qX0tcazL5PCQFuZ7pxsfT6XHA7xQkaFtYVrgt4Kq0";
+//    private static final String APP_RONDO_AUTOMATION_PRODKEY = "prod_lL8RSFzmHy0iVYXQpzjUVEHDlaUz5idT0H7BVs6Bn1Q";
 
     private static final String APP_MUSALA_QA = "Musala QA";
     private static final String APP_MUSALA_QA_ID = "app_qA781mPlJYjzlZLDlTh68cdNDUOf31kcTg1TCbSXSS0";
