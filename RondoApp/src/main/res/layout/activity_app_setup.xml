@@ -277,6 +277,13 @@
             android:textSize="14dp"
             />
         <Button
+          android:id="@+id/migration"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Migration"
+          android:textSize="14dp"
+          />
+        <Button
             android:id="@+id/call_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

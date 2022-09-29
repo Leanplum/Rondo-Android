@@ -49,6 +49,7 @@ public class AppSetupFragment extends Fragment {
         createStartButton();
         createAppPickerButton();
         createEnvPickerButton();
+        createMigrationButton();
         createChannelButton();
         setupProductionSwitch();
     }
@@ -78,6 +79,14 @@ public class AppSetupFragment extends Fragment {
                 Intent myIntent = new Intent(getActivity(), LeanplumEnvPickerActivity.class);
                 startActivity(myIntent);
             }
+        });
+    }
+
+    private void createMigrationButton() {
+        Button button = getView().findViewById(R.id.migration);
+        button.setOnClickListener(v -> {
+            Intent myIntent = new Intent(getActivity(), MigrationActivity.class);
+            startActivity(myIntent);
         });
     }
 

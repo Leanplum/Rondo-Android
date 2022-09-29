@@ -80,6 +80,9 @@
             android:name=".QueueActivity"
             android:label="Action Queue"/>
         <activity
+            android:name=".MigrationActivity"
+            android:label="Migration Details"/>
+        <activity
             android:name=".TextActivity"
             android:label="Text"/>
         <activity
