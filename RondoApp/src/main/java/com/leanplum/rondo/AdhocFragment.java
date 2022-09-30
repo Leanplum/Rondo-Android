@@ -91,6 +91,7 @@ public class AdhocFragment extends Fragment {
     }
 
     private void sendUserAttr() {
+        String userId = ((EditText) getView().findViewById(R.id.attrUserId)).getText().toString();;
         String attrKey = ((EditText)getView().findViewById(R.id.attrKey))
                 .getText().toString();
         String attrValue = ((EditText)getView().findViewById(R.id.attrValue))
@@ -98,7 +99,11 @@ public class AdhocFragment extends Fragment {
         Map attrib = new HashMap();
         String value = attrValue.equals("null") ? null : attrValue.trim();
         attrib.put(attrKey.trim(), value);
-        Leanplum.setUserAttributes(attrib);
+        if (TextUtils.isEmpty(userId)) {
+          Leanplum.setUserAttributes(attrib);
+        } else {
+          Leanplum.setUserAttributes(userId, attrib);
+        }
         // TODO: figure out how to alert state response/status
 
     }

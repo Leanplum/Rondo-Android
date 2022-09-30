@@ -18,6 +18,7 @@ object MigrationMethodsContainer {
     prepareTrack()
     prepareTrackPurchase()
     prepareTrackGooglePlayPurchase()
+    prepareSetTrafficSourceInfo()
   }
 
   private fun createTrackParams() = mutableMapOf<String, Any?>(
@@ -86,8 +87,23 @@ object MigrationMethodsContainer {
       add(ButtonEntry("setUserAttributes(null)") { text -> Leanplum.setUserAttributes(null) })
       add(ButtonEntry("setUserAttributes(one-attribute)") { text -> Leanplum.setUserAttributes(mapOf("param1" to "value1")) })
       add(ButtonEntry("setUserAttributes(all-type-attributes)") { text -> Leanplum.setUserAttributes(createAttributeParams()) })
-      //add(ButtonEntry("") { text ->  })
-      // TODO add setUserAttributes(userId, userAttributes)
+    }
+  }
+
+  private fun createTrafficSourceInfo() = mutableMapOf(
+    "publisherId" to "pub-id",
+    "publisherName" to "pub-name",
+    "publisherSubPublisher" to "sub-publisher",
+    "publisherSubSite" to "sub-site",
+    "publisherSubCampaign" to "sub-campaign",
+    "publisherSubAdGroup" to "sub-ad-group",
+    "publisherSubAd" to "sub-ad",
+  )
+
+  private fun prepareSetTrafficSourceInfo() {
+    buttonEntries.apply {
+      add(ButtonEntry("Leanplum.setTrafficSourceInfo"))
+      add(ButtonEntry("setTrafficSourceInfo(all-type-source-info)") { text -> Leanplum.setTrafficSourceInfo(createTrafficSourceInfo()) })
     }
   }
 }

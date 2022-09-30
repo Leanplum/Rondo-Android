@@ -122,6 +122,14 @@
                 android:textColor="@color/colorPrimaryDark"
                 />
             <EditText
+              android:id="@+id/attrUserId"
+              android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:hint="User ID (Optional, String)"
+              android:inputType="textNoSuggestions"
+              android:textSize="16dp">
+            </EditText>
+            <EditText
                 android:id="@+id/attrKey"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
