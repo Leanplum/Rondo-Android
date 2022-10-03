@@ -21,7 +21,7 @@ android {
     compileSdkVersion 31
     defaultConfig {
         applicationId "com.leanplum.rondo"
-        minSdkVersion 17
+        minSdkVersion 19 // Xiaomi SDK 5.0.6 needs 19
         targetSdkVersion 31
         versionCode
         versionName "1.0"
@@ -143,10 +143,10 @@ dependencies {
     prodImplementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
     prodImplementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
     prodImplementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
-    if (isMiPushSupported(LEANPLUM_SDK_VERSION)) {
-        println "adding leanplum-mipush dependency"
-        prodImplementation "com.leanplum:leanplum-mipush:${LEANPLUM_SDK_VERSION}"
-    }
+//    if (isMiPushSupported(LEANPLUM_SDK_VERSION)) { // Deprecating leanplum-mipush module
+//        println "adding leanplum-mipush dependency"
+//        prodImplementation "com.leanplum:leanplum-mipush:${LEANPLUM_SDK_VERSION}"
+//    }
     if (isHmsSupported(LEANPLUM_SDK_VERSION)) {
         println "adding leanplum-hms dependency"
         prodImplementation "com.leanplum:leanplum-hms:${LEANPLUM_SDK_VERSION}"
@@ -158,13 +158,17 @@ dependencies {
         devImplementation project(':AndroidSDKPush')
         devImplementation project(':AndroidSDKLocation')
         devImplementation project(':AndroidSDKFcm')
-        if (findProject(':AndroidSDKMiPush') != null) {
-            devImplementation project(':AndroidSDKMiPush')
-        }
+//        if (findProject(':AndroidSDKMiPush') != null) { // Deprecating leanplum-mipush module
+//            devImplementation project(':AndroidSDKMiPush')
+//        }
         if (findProject(':AndroidSDKHms') != null) {
             devImplementation project(':AndroidSDKHms')
         }
     }
+
+    // Xiaomi from CT SDK for both dev and prod flavors
+    implementation "com.clevertap.android:clevertap-xiaomi-sdk:1.5.0"
+    implementation files("libs/MiPush_SDK_Client_5_0_6-G_3rd.aar")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'

@@ -11,7 +11,6 @@ import com.google.firebase.FirebaseApp;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.annotations.Parser;
-import com.leanplum.callbacks.StartCallback;
 import com.leanplum.internal.Log.Level;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
@@ -50,16 +49,8 @@ public class RondoApplication extends Application {
         LeanplumEnvPersistence.seedDatabase();
 
         setUpInitialAppState();
+        initCleverTap();
         initLeanplum();
-
-        CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
-        CleverTapAPI.createNotificationChannel(
-            this,
-            "YourChannelId",
-            "Your Channel Name",
-            "Your Channel Description",
-            5,
-            true);
     }
 
     private void setUpInitialAppState() {
@@ -67,6 +58,22 @@ public class RondoApplication extends Application {
         RondoPreferences rondoPreferences = RondoPreferences.getRondoPreferences();
         state.setApp(rondoPreferences.getApp());
         state.setEnv(rondoPreferences.getEnv());
+    }
+
+    private void initCleverTap() {
+        // Rondo App from Xiaomi console
+        CleverTapAPI.changeXiaomiCredentials("2882303761518843048", "5601884323048");
+        CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
+        // Register notification channels
+        Leanplum.onCleverTapInstanceInitialized(cleverTapInstance -> {
+            CleverTapAPI.createNotificationChannel(// TODO test when changing mid-session if pushes work
+                RondoApplication.this,
+                "YourChannelId",
+                "Your Channel Name",
+                "Your Channel Description",
+                5,
+                true);
+        });
     }
 
     private void initLeanplum() {
@@ -95,8 +102,6 @@ public class RondoApplication extends Application {
         // Enable for GCM
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
 
-        initMiPushApp();
-
         Map<String, Object> startAttributes = new HashMap<>();
         startAttributes.put("startAttributeInt", 1);
         startAttributes.put("startAttributeString", "stringValueFromStart");
@@ -104,14 +109,15 @@ public class RondoApplication extends Application {
         Leanplum.start(this, startAttributes);
     }
 
-    private void initMiPushApp() {
-        try {
-            Class.forName("com.leanplum.LeanplumMiPushHandler")
-                .getDeclaredMethod("setApplication", String.class, String.class)
-                .invoke(null, "2882303761518843048", "5601884323048"); // TODO Currently Rondo App from Xiaomi console
-        } catch (Throwable ignore) {
-        }
-    }
+// Deprecating leanplum-mipush module
+//    private void initMiPushApp() {
+//        try {
+//            Class.forName("com.leanplum.LeanplumMiPushHandler")
+//                .getDeclaredMethod("setApplication", String.class, String.class)
+//                .invoke(null, "2882303761518843048", "5601884323048"); // TODO Currently Rondo App from Xiaomi console
+//        } catch (Throwable ignore) {
+//        }
+//    }
 
     @Override
     protected void attachBaseContext(Context base) {
