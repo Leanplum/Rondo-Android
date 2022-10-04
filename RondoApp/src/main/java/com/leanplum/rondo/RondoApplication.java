@@ -7,6 +7,7 @@ import android.os.Build;
 import androidx.multidex.MultiDex;
 import com.clevertap.android.pushtemplates.PushTemplateNotificationHandler;
 import com.clevertap.android.sdk.CleverTapAPI;
+import com.clevertap.android.sdk.pushnotification.PushConstants;
 import com.google.firebase.FirebaseApp;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
@@ -63,6 +64,7 @@ public class RondoApplication extends Application {
     private void initCleverTap() {
         // Rondo App from Xiaomi console
         CleverTapAPI.changeXiaomiCredentials("2882303761518843048", "5601884323048");
+        CleverTapAPI.enableXiaomiPushOn(PushConstants.XIAOMI_MIUI_DEVICES); // using ALL_DEVICES would spawn ":pushservice" process on non-Xiaomi devices
         CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
         // Register notification channels
         Leanplum.onCleverTapInstanceInitialized(cleverTapInstance -> {
