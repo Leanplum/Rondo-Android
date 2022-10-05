@@ -36,7 +36,7 @@ object MigrationMethodsContainer {
 
   private fun createAttributeParams() = createTrackParams().apply {
     // arrays and nested lists are not supported in LP.setUserAttribute
-    this["list_param_1_2_3"] = listOf(1, 2, 3)
+    this["list_param_a_1_b_2"] = listOf("a", 1, "b", 2)
     this["list_param_empty"] = emptyList<Any>()
   }
 
