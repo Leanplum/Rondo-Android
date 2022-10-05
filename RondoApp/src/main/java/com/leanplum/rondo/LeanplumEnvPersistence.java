@@ -17,6 +17,9 @@ public class LeanplumEnvPersistence {
     private static final String ENV_QA = "ingester.qa.leanplum.com";
     private static final String ENV_QA_SOCKET = "dev-qa.leanplum.com";
 
+    private static final String ENV_CT = "ct-dot-ingester.prod.leanplum.com";
+    private static final String ENV_CT_SOCKET = "dev.leanplum.com";
+
     private static final int SOCKET_PORT = 443;
     private static final boolean API_USE_SSL = true;
 
@@ -68,6 +71,15 @@ public class LeanplumEnvPersistence {
         return env;
     }
 
+    static public LeanplumEnv ct() {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        LeanplumEnv env = realm.where(LeanplumEnv.class).
+                equalTo("apiHostName", ENV_CT).findFirst();
+        realm.commitTransaction();
+        return env;
+    }
+
     public static void seedDatabase() {
         Realm realm = Realm.getDefaultInstance();
         if (production() == null) {
@@ -83,6 +95,11 @@ public class LeanplumEnvPersistence {
         if (staging() == null) {
             realm.beginTransaction();
             realm.copyToRealm(stagingSeed());
+            realm.commitTransaction();
+        }
+        if (ct() == null) {
+            realm.beginTransaction();
+            realm.copyToRealm(ctSeed());
             realm.commitTransaction();
         }
     }
@@ -110,6 +127,15 @@ public class LeanplumEnvPersistence {
         env.setApiHostName(ENV_STAGING);
         env.setApiSSL(API_USE_SSL);
         env.setSocketHostName(ENV_STAGING_SOCKET);
+        env.setSocketPort(SOCKET_PORT);
+        return env;
+    }
+
+    static private LeanplumEnv ctSeed() {
+        LeanplumEnv env = new LeanplumEnv();
+        env.setApiHostName(ENV_CT);
+        env.setApiSSL(API_USE_SSL);
+        env.setSocketHostName(ENV_CT_SOCKET);
         env.setSocketPort(SOCKET_PORT);
         return env;
     }
