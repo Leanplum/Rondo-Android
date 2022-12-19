@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
+import com.leanplum.internal.VarCache;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
@@ -52,6 +53,11 @@ public class AppSetupFragment extends Fragment {
         createMigrationButton();
         createChannelButton();
         setupProductionSwitch();
+
+        Button button = getView().findViewById(R.id.sync_variable);
+        button.setOnClickListener(v -> {
+            VarCache.sendContentIfChanged(true, false);
+        });
     }
 
     @Override

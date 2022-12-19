@@ -263,6 +263,13 @@
         </LinearLayout>
 
         <Button
+          android:id="@+id/sync_variable"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Sync Variables"
+          android:textSize="14dp" />
+
+        <Button
             android:id="@+id/app_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

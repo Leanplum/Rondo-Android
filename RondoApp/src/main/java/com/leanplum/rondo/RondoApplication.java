@@ -44,6 +44,7 @@ public class RondoApplication extends Application {
         QueueActivityModel.INSTANCE.setListenerEnabled(true);
 
         Parser.parseVariables(this);
+        Parser.parseVariablesForClasses(NewVariables.class);
         LeanplumActivityHelper.enableLifecycleCallbacks(this);
 
         Realm.init(this);
