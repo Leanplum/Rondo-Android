@@ -54,7 +54,7 @@ script:
   - "./gradlew test"
 before_deploy:
   - "./gradlew assembleProdRelease"
-  - gem update --system OLD_VERSION
+  - gem update --system 2.4.1
 deploy:
   provider: releases
   edge: true
