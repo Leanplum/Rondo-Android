@@ -54,6 +54,7 @@ script:
   - "./gradlew test"
 before_deploy:
   - "./gradlew assembleProdRelease"
+  - ls -la RondoApp/build/outputs/apk/prod/release
 deploy:
   provider: releases
   api_key:
