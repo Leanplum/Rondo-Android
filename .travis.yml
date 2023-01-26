@@ -9,6 +9,7 @@ env:
     - TOOLS=${ANDROID_HOME}/cmdline-tools/latest
     # PATH order is important, the 'emulator' script exists in more than one place
     - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
+    - TRAVIS_TAG="$LEANPLUM_SDK_VERSION"
 
 # Uncomment and remove lines in before_install when issue with JDK is resolved
 # Check thread here: https://travis-ci.community/t/installing-oraclejdk-11-failed/13050/10
