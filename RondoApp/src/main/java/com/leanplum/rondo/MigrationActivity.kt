@@ -33,6 +33,7 @@ class MigrationActivity : AppCompatActivity() {
       MigrationManager.wrapper.fcmHandler?.forwardingEnabled = false
       it.isEnabled = false
     }
+    identityKeys().text = MigrationConfig.identityList.toString()
 
     prepareButtons()
   }
@@ -79,4 +80,5 @@ class MigrationActivity : AppCompatActivity() {
   private fun trackGooglePlayPurchases() = findViewById<TextView>(R.id.trackGooglePlayPurchases)
   private fun attributeMappings() = findViewById<Button>(R.id.attributeMappings)
   private fun disableFcmForward() = findViewById<Button>(R.id.disableFcmForward)
+  private fun identityKeys() = findViewById<TextView>(R.id.identityKeys)
 }
