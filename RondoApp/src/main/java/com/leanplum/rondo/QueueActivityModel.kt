@@ -6,8 +6,9 @@ import com.leanplum.actions.MessageDisplayChoice
 import com.leanplum.actions.MessageDisplayController
 import com.leanplum.actions.MessageDisplayListener
 import com.leanplum.actions.internal.ActionsTrigger
-import com.leanplum.actions.internal.triggerDelayedMessages
 import com.leanplum.internal.ActionManager
+import com.leanplum.internal.Log
+import com.leanplum.internal.Util
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -19,7 +20,10 @@ object MessageDisplayControllerObject : MessageDisplayController {
   var displayChoice: MessageDisplayChoice? = null
   var prioritizationChoice: PrioritizationType? = null
 
-  override fun shouldDisplayMessage(action: ActionContext): MessageDisplayChoice? = displayChoice
+  override fun shouldDisplayMessage(action: ActionContext): MessageDisplayChoice? =
+    displayChoice.also {
+      Log.d("ShouldDisplayMessage running on main thread: ${Util.isMainThread()}")
+    }
 
   override fun prioritizeMessages(
     actions: List<ActionContext>,
@@ -28,6 +32,8 @@ object MessageDisplayControllerObject : MessageDisplayController {
     PrioritizationType.ONLY_FIRST -> listOf(actions.first())
     PrioritizationType.ALL_REVERSED -> actions.reversed()
     else -> actions
+  }.also {
+    Log.d("MessagePrioritization running on main thread: ${Util.isMainThread()}")
   }
 }
 
@@ -41,18 +47,21 @@ object MessageDisplayListenerObject : MessageDisplayListener {
     if (trackDisplayEvents) {
       trackedEventsJson.addAction(action, "onMessageDisplayed")
     }
+    Log.d("onMessageDisplayed running on main thread: ${Util.isMainThread()}")
   }
 
   override fun onMessageDismissed(action: ActionContext) {
     if (trackDismissEvents) {
       trackedEventsJson.addAction(action, "onMessageDismissed")
     }
+    Log.d("onMessageDismissed running on main thread: ${Util.isMainThread()}")
   }
 
   override fun onActionExecuted(name: String, action: ActionContext) {
     if (trackExecuteEvents) {
       trackedEventsJson.addAction(action, "onActionExecuted")
     }
+    Log.d("onActionExecuted running on main thread: ${Util.isMainThread()}")
   }
 }
 

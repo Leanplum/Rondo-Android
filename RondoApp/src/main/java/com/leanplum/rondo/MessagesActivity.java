@@ -29,7 +29,7 @@ public class MessagesActivity extends AppCompatActivity {
 
         final ListView listview = findViewById(R.id.listview);
         String[] values = new String[] { "alert", "centerPopup", "confirm",
-                "interstitial", "richInterstitial", "webInterstitial", "banner",
+                "interstitial", "richInterstitial", "imageInterstitial", "webInterstitial", "banner",
                 LOG_IMPRESSIONS, LOG_TRIGGERS};
 
         final ArrayList<String> list = new ArrayList<String>();

@@ -27,6 +27,7 @@ class QueueActivity : AppCompatActivity() {
   }
 
   private fun initCheckBoxes() {
+    asyncHandlersView().isChecked = LeanplumActions.useWorkerThreadForDecisionHandlers
     pauseQueueView().isChecked = LeanplumActions.isQueuePaused()
     disableQueueView().isChecked = !LeanplumActions.isQueueEnabled()
     dismissOnPushOpenedView().isChecked = ActionManager.getInstance().dismissOnPushOpened
@@ -124,6 +125,10 @@ class QueueActivity : AppCompatActivity() {
     val checked: Boolean = (view as CompoundButton).isChecked
 
     when (view) {
+      asyncHandlersView() -> {
+        LeanplumActions.useWorkerThreadForDecisionHandlers = checked
+        initCheckBoxes()
+      }
       pauseQueueView() -> {
         LeanplumActions.setQueuePaused(checked)
         initCheckBoxes()
@@ -148,6 +153,7 @@ class QueueActivity : AppCompatActivity() {
     }
   }
 
+  fun asyncHandlersView() = findViewById<CheckBox>(R.id.asyncHandlers)
   fun pauseQueueView() = findViewById<CheckBox>(R.id.pauseQueue)
   fun disableQueueView() = findViewById<CheckBox>(R.id.disableQueue)
   fun dismissOnPushOpenedView() = findViewById<CheckBox>(R.id.dismissOnPushOpened)

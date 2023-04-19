@@ -11,6 +11,12 @@
     android:orientation="vertical">
 
     <CheckBox
+      android:id="@+id/asyncHandlers"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="onCheckboxClicked"
+      android:text="Enable Async Handlers" />
+    <CheckBox
       android:id="@+id/pauseQueue"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
