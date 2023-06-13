@@ -15,8 +15,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SwitchCompat;
+import com.clevertap.android.sdk.leanplum.LeanplumCT;
 import com.leanplum.ChannelManager;
-import com.leanplum.Leanplum;
 import com.leanplum.rondo.models.InternalState;
 
 import java.io.BufferedReader;
@@ -42,7 +42,7 @@ public class PushActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_push);
         createChannelButton();
-        initMuteChannelButton();
+        //initMuteChannelButton();
         final ListView listview = findViewById(R.id.listview);
 
         String[] values = new String[] { "pushRender", "pushAction", "pushImage",
@@ -63,7 +63,7 @@ public class PushActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
-                Leanplum.track(item);
+                LeanplumCT.track(item);
             }
 
         });

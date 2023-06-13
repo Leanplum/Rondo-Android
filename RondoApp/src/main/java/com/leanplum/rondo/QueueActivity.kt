@@ -5,10 +5,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import com.leanplum.actions.LeanplumActions
-import com.leanplum.actions.MessageDisplayChoice
-import com.leanplum.internal.ActionManager
-import com.leanplum.internal.Log
 
 class QueueActivity : AppCompatActivity() {
 
@@ -23,15 +19,9 @@ class QueueActivity : AppCompatActivity() {
 
   override fun onResume() {
     super.onResume()
-    pauseQueueView().isChecked = LeanplumActions.isQueuePaused()
   }
 
   private fun initCheckBoxes() {
-    asyncHandlersView().isChecked = LeanplumActions.useWorkerThreadForDecisionHandlers
-    pauseQueueView().isChecked = LeanplumActions.isQueuePaused()
-    disableQueueView().isChecked = !LeanplumActions.isQueueEnabled()
-    dismissOnPushOpenedView().isChecked = ActionManager.getInstance().dismissOnPushOpened
-    continueOnActivityResumeView().isChecked = ActionManager.getInstance().continueOnActivityResumed
   }
 
   private fun initController() {
@@ -49,34 +39,8 @@ class QueueActivity : AppCompatActivity() {
       QueueActivityModel.controllerEnabled = checked
     }
 
-    initShouldDisplayMessage()
-    initPrioritizeMessages()
   }
 
-  private fun initShouldDisplayMessage() {
-    val viewId: Int
-    when(MessageDisplayControllerObject.displayChoice) {
-      null -> viewId = R.id.radioDisplayNone
-      MessageDisplayChoice.show() -> viewId = R.id.radioShow
-      MessageDisplayChoice.discard() -> viewId = R.id.radioDiscard
-      MessageDisplayChoice.delayIndefinitely() -> viewId = R.id.radioDelayIndefinitely
-      else -> {
-        viewId = R.id.radioDelay
-        delaySeconds().setText(
-          MessageDisplayControllerObject.displayChoice?.delaySeconds.toString())
-      }
-    }
-    radioGroupDisplay().check(viewId)
-  }
-
-  private fun initPrioritizeMessages() {
-    val viewId = when(MessageDisplayControllerObject.prioritizationChoice) {
-      PrioritizationType.ONLY_FIRST -> R.id.radioOnlyFirst
-      PrioritizationType.ALL_REVERSED -> R.id.radioAllReversed
-      else -> R.id.radioPrioritizeNone
-    }
-    radioGroupPrioritize().check(viewId)
-  }
 
   private fun initListener() {
     if (QueueActivityModel.listenerEnabled) {
@@ -93,30 +57,12 @@ class QueueActivity : AppCompatActivity() {
       QueueActivityModel.listenerEnabled = checked
     }
 
-    onMessageDisplayedCheckBox().isChecked = MessageDisplayListenerObject.trackDisplayEvents
-    onMessageDismissedCheckBox().isChecked = MessageDisplayListenerObject.trackDismissEvents
-    onActionExecutedCheckBox().isChecked = MessageDisplayListenerObject.trackExecuteEvents
-  }
-
-  fun onRadioButtonClicked(view: View) = with(MessageDisplayControllerObject) {
-    when (view) {
-      showRadioButton() -> displayChoice = MessageDisplayChoice.show()
-      discardRadioButton() -> displayChoice = MessageDisplayChoice.discard()
-      delayIndefinitelyRadioButton() -> displayChoice = MessageDisplayChoice.delayIndefinitely()
-      delayRadioButton() -> displayChoice = MessageDisplayChoice.delay(delaySecondsInt())
-      displayNoneRadioButton() -> displayChoice = null
-
-      onlyFirstRadioButton() -> prioritizationChoice = PrioritizationType.ONLY_FIRST
-      allReversedRadioButton() -> prioritizationChoice = PrioritizationType.ALL_REVERSED
-      prioritizeNoneRadioButton() -> prioritizationChoice = null
-    }
   }
 
   fun delaySecondsInt(): Int {
     try {
       return Integer.parseInt(delaySeconds().text.toString())
     } catch (t: Throwable) {
-      Log.e("error parsing: ${t.message}")
       return 5
     }
   }
@@ -126,27 +72,18 @@ class QueueActivity : AppCompatActivity() {
 
     when (view) {
       asyncHandlersView() -> {
-        LeanplumActions.useWorkerThreadForDecisionHandlers = checked
         initCheckBoxes()
       }
       pauseQueueView() -> {
-        LeanplumActions.setQueuePaused(checked)
         initCheckBoxes()
       }
-      disableQueueView() -> LeanplumActions.setQueueEnabled(!checked)
-      dismissOnPushOpenedView() -> LeanplumActions.setDismissOnPushOpened(checked)
-      continueOnActivityResumeView() -> LeanplumActions.setContinueOnActivityResumed(checked)
 
-      onMessageDisplayedCheckBox() -> MessageDisplayListenerObject.trackDisplayEvents = checked
-      onMessageDismissedCheckBox() -> MessageDisplayListenerObject.trackDismissEvents = checked
-      onActionExecutedCheckBox() -> MessageDisplayListenerObject.trackExecuteEvents = checked
     }
   }
 
   fun onButtonClicked(view: View) {
     when (view) {
       showQueueButton() -> TextActivity.start(this, QueueActivityModel.queueJson())
-      triggerDelayedMessagesButton() -> LeanplumActions.triggerDelayedMessages()
       showDelayedMessagesButton() -> TextActivity.start(this, QueueActivityModel.delayedMessagesJson())
       showEventsButton() -> TextActivity.start(this, QueueActivityModel.eventsJson())
       resetEventsButton() -> QueueActivityModel.resetEvents()

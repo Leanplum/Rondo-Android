@@ -1,7 +1,10 @@
 package com.leanplum.rondo
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.Button
@@ -11,13 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.clevertap.android.sdk.CleverTapAPI
 import com.clevertap.android.sdk.variables.Var
 import com.clevertap.android.sdk.variables.callbacks.VariablesChangedCallback
-import com.leanplum.Leanplum
-import com.leanplum.internal.JsonConverter
-import com.leanplum.internal.Log
-import com.leanplum.internal.OperationQueue
-import com.leanplum.migration.MigrationManager
-import com.leanplum.migration.model.MigrationConfig
-import com.leanplum.utils.SizeUtil
 import org.json.JSONObject
 
 class MigrationActivity : AppCompatActivity() {
@@ -26,52 +22,40 @@ class MigrationActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_migration)
 
-    state().text = MigrationConfig.state
-    accountId().text = MigrationConfig.accountId
-    accountToken().text = MigrationConfig.accountToken
-    accountRegion().text = MigrationConfig.accountRegion
-    trackGooglePlayPurchases().text = MigrationConfig.trackGooglePlayPurchases.toString()
-    attributeMappings().setOnClickListener {
-      val json = JSONObject(JsonConverter.toJson(MigrationConfig.attributeMap)).toString(4)
-      TextActivity.start(this, json)
-    }
-    disableFcmForward().isEnabled = MigrationManager.wrapper.fcmHandler?.forwardingEnabled ?: false
-    disableFcmForward().setOnClickListener {
-      MigrationManager.wrapper.fcmHandler?.forwardingEnabled = false
-      it.isEnabled = false
-    }
-    identityKeys().text = MigrationConfig.identityList.toString()
+    state().text = "Merged SDK"
+    accountId().text = "TODO"
+    accountToken().text = "TODO"
+    accountRegion().text = "TODO"
 
     prepareVariables()
     prepareButtons()
   }
 
   private fun prepareVariables() {
-    Leanplum.addCleverTapInstanceCallback { cleverTap ->
-      val variables = listOf(
-        cleverTap.defineVariable("var_string", "hello world"),
-        cleverTap.defineVariable("var_integer", 10),
-        cleverTap.defineVariable("var_decimal", 11.2),
-        cleverTap.defineVariable("var_boolean", true),
-        cleverTap.defineVariable("var_dictionary", mapOf(
-          "nested_string" to "hello nested",
-          "nested_double" to 10.5
-        )),
-        cleverTap.defineVariable("dot_group.var_string", "hello world"),
-        cleverTap.defineVariable("dot_group.var_dictionary", mapOf(
-          "nested_float" to 0.5f,
-          "nested_int" to 32
-        )),
-      )
-      OperationQueue.sharedInstance().addUiOperation {
-        cleverTap.addVariablesChangedCallback(object : VariablesChangedCallback() {
-          override fun variablesChanged() {
-            Log.i("Rondo refreshing variables in Migration Details page")
-            prepareVariableViews(variables, cleverTap)
-          }
-        })
-        prepareVariableViews(variables, cleverTap)
-      }
+    val cleverTap = CleverTapAPI.getDefaultInstance(this) ?: return
+    val variables = listOf(
+      cleverTap.defineVariable("var_string", "hello world"),
+      cleverTap.defineVariable("var_integer", 10),
+      cleverTap.defineVariable("var_decimal", 11.2),
+      cleverTap.defineVariable("var_boolean", true),
+      cleverTap.defineVariable("var_dictionary", mapOf(
+        "nested_string" to "hello nested",
+        "nested_double" to 10.5
+      )),
+      cleverTap.defineVariable("dot_group.var_string", "hello world"),
+      cleverTap.defineVariable("dot_group.var_dictionary", mapOf(
+        "nested_float" to 0.5f,
+        "nested_int" to 32
+      )),
+    )
+    runOnUiThread {
+      cleverTap.addVariablesChangedCallback(object : VariablesChangedCallback() {
+        override fun variablesChanged() {
+          Log.i("Rondo", "Rondo refreshing variables in Migration Details page")
+          prepareVariableViews(variables, cleverTap)
+        }
+      })
+      prepareVariableViews(variables, cleverTap)
     }
   }
 
@@ -89,7 +73,7 @@ class MigrationActivity : AppCompatActivity() {
 
     insertButton(container, "Fetch Variables") {
       cleverTap.fetchVariables {
-        Log.i("Rondo fetched variables result is $it")
+        Log.i("Rondo", "Rondo fetched variables result is $it")
       }
     }
 
@@ -124,8 +108,15 @@ class MigrationActivity : AppCompatActivity() {
       ViewGroup.LayoutParams.WRAP_CONTENT,
       ViewGroup.LayoutParams.WRAP_CONTENT
     )
-    lp.topMargin = SizeUtil.dpToPx(this, topMarginPx)
+    lp.topMargin = dpToPx(this, topMarginPx)
     container.addView(tv, lp)
+  }
+
+  fun dpToPx(context: Context, dp: Int): Int {
+    val displayMetrics = context.resources.displayMetrics
+    return Math.round(
+      dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)
+    )
   }
 
   private fun insertButton(container: LinearLayout, label: String, callback: (String) -> Unit) {

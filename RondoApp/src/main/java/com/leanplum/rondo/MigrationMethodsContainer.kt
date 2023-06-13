@@ -1,6 +1,6 @@
 package com.leanplum.rondo
 
-import com.leanplum.Leanplum
+import com.clevertap.android.sdk.leanplum.LeanplumCT
 import java.util.*
 
 data class ButtonEntry(
@@ -43,19 +43,19 @@ object MigrationMethodsContainer {
   private fun prepareTrack() {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.track"))
-      add(ButtonEntry("track(event)") { text -> Leanplum.track(text) })
-      add(ButtonEntry("track(event info)") { text -> Leanplum.track(text, "info") })
-      add(ButtonEntry("track(event value info one-param)") { text -> Leanplum.track(text, 5.0, "info", mapOf("param1" to "value1")) })
-      add(ButtonEntry("track(event all-type-params)") { text -> Leanplum.track(text, createTrackParams()) })
+      add(ButtonEntry("track(event)") { text -> LeanplumCT.track(text) })
+      add(ButtonEntry("track(event info)") { text -> LeanplumCT.track(text, "info") })
+      add(ButtonEntry("track(event value info one-param)") { text -> LeanplumCT.track(text, 5.0, "info", mapOf("param1" to "value1")) })
+      add(ButtonEntry("track(event all-type-params)") { text -> LeanplumCT.track(text, createTrackParams()) })
     }
   }
 
   private fun prepareTrackPurchase() {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.trackPurchase"))
-      add(ButtonEntry("trackPurchase(event 0 null null)") { text -> Leanplum.trackPurchase(text, 0.0, null, null) })
-      add(ButtonEntry("trackPurchase(event value currency one-param)") { text -> Leanplum.trackPurchase(text, 2.5, "BGN", mapOf("param1" to "value1")) })
-      add(ButtonEntry("trackPurchase(event value currency all-type-params)") { text -> Leanplum.trackPurchase(text, 2.5, "BGN", createTrackParams()) })
+      add(ButtonEntry("trackPurchase(event 0 null null)") { text -> LeanplumCT.trackPurchase(text, 0.0, null, null) })
+      add(ButtonEntry("trackPurchase(event value currency one-param)") { text -> LeanplumCT.trackPurchase(text, 2.5, "BGN", mapOf("param1" to "value1")) })
+      add(ButtonEntry("trackPurchase(event value currency all-type-params)") { text -> LeanplumCT.trackPurchase(text, 2.5, "BGN", createTrackParams()) })
     }
   }
 
@@ -64,33 +64,33 @@ object MigrationMethodsContainer {
   private fun prepareTrackGooglePlayPurchase() {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.trackGooglePlayPurchase"))
-      add(ButtonEntry("trackGooglePlayPurchase(event null 0 null null null null)") { text -> Leanplum.trackGooglePlayPurchase(text, null, 0, null, null, null, null) })
-      add(ButtonEntry("trackGooglePlayPurchase(event item value currency data signature one-param)") { text -> Leanplum.trackGooglePlayPurchase(text, "item", 10000000, "BGN", createPurchaseData(), "data-signature", mapOf("param1" to "value1")) })
-      add(ButtonEntry("trackGooglePlayPurchase(event item value currency data signature all-type-params)") { text -> Leanplum.trackGooglePlayPurchase(text, "item", 10000000, "BGN", createPurchaseData(), "data-signature", createTrackParams()) })
+      add(ButtonEntry("trackGooglePlayPurchase(event null 0 null null null null)") { text -> LeanplumCT.trackGooglePlayPurchase(text, null, 0, null, null, null, null) })
+      add(ButtonEntry("trackGooglePlayPurchase(event item value currency data signature one-param)") { text -> LeanplumCT.trackGooglePlayPurchase(text, "item", 10000000, "BGN", createPurchaseData(), "data-signature", mapOf("param1" to "value1")) })
+      add(ButtonEntry("trackGooglePlayPurchase(event item value currency data signature all-type-params)") { text -> LeanplumCT.trackGooglePlayPurchase(text, "item", 10000000, "BGN", createPurchaseData(), "data-signature", createTrackParams()) })
     }
   }
 
   private fun prepareAdvanceTo() {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.advanceTo"))
-      add(ButtonEntry("advanceTo(null)") { Leanplum.advanceTo(null) }) // will be skipped in CT
-      add(ButtonEntry("advanceTo(event)") { text -> Leanplum.advanceTo(text) })
-      add(ButtonEntry("advanceTo(event info)") { text -> Leanplum.advanceTo(text, "info") })
-      add(ButtonEntry("advanceTo(event info one-param)") { text -> Leanplum.advanceTo(text, "info", mapOf("param1" to "value1")) })
-      add(ButtonEntry("advanceTo(event info all-type-params)") { text -> Leanplum.advanceTo(text, "info", createTrackParams()) })
+      add(ButtonEntry("advanceTo(null)") { LeanplumCT.advanceTo(null) }) // will be skipped in CT
+      add(ButtonEntry("advanceTo(event)") { text -> LeanplumCT.advanceTo(text) })
+      add(ButtonEntry("advanceTo(event info)") { text -> LeanplumCT.advanceTo(text, "info") })
+      add(ButtonEntry("advanceTo(event info one-param)") { text -> LeanplumCT.advanceTo(text, "info", mapOf("param1" to "value1")) })
+      add(ButtonEntry("advanceTo(event info all-type-params)") { text -> LeanplumCT.advanceTo(text, "info", createTrackParams()) })
     }
   }
 
   private fun prepareSetUserAttributes() {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.setUserAttributes"))
-      add(ButtonEntry("setUserAttributes(null)") { Leanplum.setUserAttributes(null) })
+      add(ButtonEntry("setUserAttributes(null)") { LeanplumCT.setUserAttributes(null) })
       add(ButtonEntry("setUserAttributes(date-of-birth-DOB)") {
         @Suppress("DEPRECATION")
-        Leanplum.setUserAttributes(mapOf("DOB" to Date(89, 11, 31)))
+        LeanplumCT.setUserAttributes(mapOf("DOB" to Date(89, 11, 31)))
       })
-      add(ButtonEntry("setUserAttributes(one-attribute)") { Leanplum.setUserAttributes(mapOf("param1" to "value1")) })
-      add(ButtonEntry("setUserAttributes(all-type-attributes)") { Leanplum.setUserAttributes(createAttributeParams()) })
+      add(ButtonEntry("setUserAttributes(one-attribute)") { LeanplumCT.setUserAttributes(mapOf("param1" to "value1")) })
+      add(ButtonEntry("setUserAttributes(all-type-attributes)") { LeanplumCT.setUserAttributes(createAttributeParams()) })
     }
   }
 
@@ -107,7 +107,7 @@ object MigrationMethodsContainer {
   private fun prepareSetTrafficSourceInfo() {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.setTrafficSourceInfo"))
-      add(ButtonEntry("setTrafficSourceInfo(all-type-source-info)") { Leanplum.setTrafficSourceInfo(createTrafficSourceInfo()) })
+      add(ButtonEntry("setTrafficSourceInfo(all-type-source-info)") { LeanplumCT.setTrafficSourceInfo(createTrafficSourceInfo()) })
     }
   }
 }

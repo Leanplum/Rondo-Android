@@ -50,7 +50,7 @@ public class SdkQaFragment extends Fragment {
         LeanplumEnv env = state.getEnv();
 
         TextView tv = getView().findViewById(R.id.sdkVersion);
-        tv.setText(BuildConfig.LEANPLUM_SDK_VERSION);
+        tv.setText(BuildConfig.CT_SDK_VERSION);
 
         TextView tv1 = getView().findViewById(R.id.appName);
         tv1.setText(app.getDisplayName());

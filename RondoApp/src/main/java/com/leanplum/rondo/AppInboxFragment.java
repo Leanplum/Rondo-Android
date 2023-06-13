@@ -13,9 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.leanplum.Leanplum;
-import com.leanplum.LeanplumInbox;
-import com.leanplum.LeanplumInboxMessage;
 import com.leanplum.rondo.adapters.LeanplumInboxMessageAdapter;
 
 import java.io.File;
@@ -38,28 +35,7 @@ public class AppInboxFragment extends
     }
 
     private void reloadData() {
-        LeanplumInbox inbox = Leanplum.getInbox();
-//        for (LeanplumInboxMessage message : inbox.allMessages()) {
-//            createTableRow(message.getTitle(), message.getSubtitle(), message.getImageFilePath());
-//            message.read(); //todo; abstract
-//        }
 
-        final ListView listview = getView().findViewById(R.id.listview);
-        final ArrayList<LeanplumInboxMessage> list = new ArrayList<>(inbox.allMessages());
-        final LeanplumInboxMessageAdapter adapter = new LeanplumInboxMessageAdapter(getContext(), list);
-        listview.setAdapter(adapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id) {
-//                final LeanplumApp app = (LeanplumApp) parent.getItemAtPosition(position);
-//                InternalState.sharedState().setApp(app);
-//                RondoPreferences.updateRondoPreferencesWithApp(app);
-//                finish();
-            }
-
-        });
     }
 
 

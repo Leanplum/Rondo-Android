@@ -10,10 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.leanplum.Leanplum;
-
-import com.leanplum.internal.Constants;
-import com.leanplum.internal.Log;
+import com.clevertap.android.sdk.leanplum.LeanplumCT;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -51,7 +48,7 @@ public class MessagesActivity extends AppCompatActivity {
                 } else if (LOG_TRIGGERS.equals(item)) {
                     logTriggerOccurrences();
                 } else {
-                    Leanplum.track(item);
+                    LeanplumCT.track(item);
                 }
             }
 
@@ -59,52 +56,10 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void logImpressionOccurrences() {
-        String prefix = String.format(Constants.Defaults.MESSAGE_IMPRESSION_OCCURRENCES_KEY, "");
 
-        Context context = Leanplum.getContext();
-        SharedPreferences prefs =
-            context.getSharedPreferences("__leanplum_messaging__", Context.MODE_PRIVATE);
-        Map<String, ?> all = prefs.getAll();
-
-        boolean hasImpressions = false;
-
-        for (Map.Entry<String, ?> entry : all.entrySet()) {
-            if (entry.getKey().startsWith(prefix)) {
-                String json = (String) entry.getValue();
-                if (!TextUtils.isEmpty(json)) {
-                    hasImpressions = true;
-                    Log.d("messageId=" + entry.getKey().replace(prefix, "") + " -> " + json);
-                }
-            }
-        }
-
-        if (!hasImpressions) {
-            Log.d("No impression occurrences yet.");
-        }
     }
 
     private void logTriggerOccurrences() {
-        String prefix = String.format(Constants.Defaults.MESSAGE_TRIGGER_OCCURRENCES_KEY, "");
 
-        Context context = Leanplum.getContext();
-        SharedPreferences prefs =
-            context.getSharedPreferences("__leanplum_messaging__", Context.MODE_PRIVATE);
-        Map<String, ?> all = prefs.getAll();
-
-        boolean hasTriggers = false;
-
-        for (Map.Entry<String, ?> entry : all.entrySet()) {
-            if (entry.getKey().startsWith(prefix)) {
-                Object value = entry.getValue();
-                if (value != null) {
-                    hasTriggers = true;
-                    Log.d("messageId=" + entry.getKey().replace(prefix, "") + " -> " + value);
-                }
-            }
-        }
-
-        if (!hasTriggers) {
-            Log.d("No trigger occurrences yet.");
-        }
     }
 }

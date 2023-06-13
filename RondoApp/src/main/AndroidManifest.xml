@@ -60,6 +60,21 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <meta-data
+          android:name="CLEVERTAP_ACCOUNT_ID"
+          android:value="TEST-8R9-69K-856Z"/>
+        <meta-data
+          android:name="CLEVERTAP_TOKEN"
+          android:value="TEST-3c6-c2b"/>
+
+        <service
+          android:name="com.clevertap.android.sdk.pushnotification.fcm.FcmMessageListenerService"
+          android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

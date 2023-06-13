@@ -2,8 +2,6 @@ package com.leanplum.rondo;
 
 import android.os.AsyncTask;
 import android.util.Base64;
-import com.leanplum.internal.Log;
-import com.leanplum.SecuredVars;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -73,24 +71,9 @@ public class SecuredVarsHelper {
       return json.getString(0);
 
     } catch (Throwable t) {
-      Log.e("Error downloading public key", t);
       return null;
     }
   }
 
-  public static boolean verify(SecuredVars securedVars, String publicKey) {
-    byte[] encryptedPayloadHash = Base64.decode(securedVars.getSignature(), Base64.URL_SAFE);
 
-    // Canonicalize
-    String payload;
-    try {
-      payload = new JsonCanonicalizer(securedVars.getJson()).getEncodedString();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-
-    PublicKey pk = getPublicKey(publicKey);
-
-    return verifySignature(encryptedPayloadHash, payload, pk);
-  }
 }

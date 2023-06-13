@@ -14,8 +14,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.leanplum.Leanplum;
-import com.leanplum.annotations.Parser;
+import com.clevertap.android.sdk.CleverTapAPI;
+import com.clevertap.android.sdk.interfaces.OnInitCleverTapIDListener;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
@@ -111,17 +111,23 @@ public class AppSetupFragment extends Fragment {
         ((TextView) getView().findViewById(R.id.devKey)).setText(app.getDevKey());
         ((TextView) getView().findViewById(R.id.prodKey)).setText(app.getProdKey());
 
-        ((TextView) getView().findViewById(R.id.userId)).setText(Leanplum.getUserId());
-        ((TextView) getView().findViewById(R.id.deviceId)).setText(Leanplum.getDeviceId());
+        String identity = (String) CleverTapAPI.getDefaultInstance(getActivity()).getProperty("Identity");
+        ((TextView) getView().findViewById(R.id.userId)).setText(identity);
+
+
+        CleverTapAPI.getDefaultInstance(getContext()).getCleverTapID(
+            ctid -> {
+                ((TextView) getView().findViewById(R.id.deviceId)).setText(ctid);
+            });
 
         TextView sdkVersion = (TextView) getView().findViewById(R.id.sdkVersion);
         if (BuildConfig.DEBUG) {
             sdkVersion.setTypeface(sdkVersion.getTypeface(), Typeface.BOLD);
         }
         if (BuildConfig.FLAVOR.equals("prod")) {
-            sdkVersion.setText(BuildConfig.LEANPLUM_SDK_VERSION);
+            sdkVersion.setText("prod with CT " + BuildConfig.CT_SDK_VERSION);
         } else if (BuildConfig.FLAVOR.equals("dev")) {
-            sdkVersion.setText("development");
+            sdkVersion.setText("dev with CT" + BuildConfig.CT_SDK_VERSION);
         }
         ((TextView) getView().findViewById(R.id.apiHostName)).setText(env.getApiHostName());
         ((TextView) getView().findViewById(R.id.apiSSL)).setText(env.getApiSSL().toString());
@@ -147,28 +153,13 @@ public class AppSetupFragment extends Fragment {
 
         LeanplumApp app = state.getApp();
 
-        if (RondoProductionMode.isProductionMode(getContext())) {
-            Leanplum.setAppIdForProductionMode(
-                    app.getAppId(),
-                    app.getProdKey()
-            );
-        } else {
-            Leanplum.setAppIdForDevelopmentMode(
-                    app.getAppId(),
-                    app.getDevKey()
-            );
-        }
-
         LeanplumEnv env = state.getEnv();
 
-        Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
-        Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
-        Parser.parseVariablesForClasses(VariablesFragment.class);
+        CleverTapAPI.getDefaultInstance(getContext()).parseVariablesForClasses(VariablesFragment.class);
 
         // Enable for GCM
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
 
-        Leanplum.start(getContext());
     }
 
     private void createChannelButton() {

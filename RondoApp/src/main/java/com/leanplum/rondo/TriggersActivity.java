@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.leanplum.Leanplum;
-
+import com.clevertap.android.sdk.leanplum.LeanplumCT;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class TriggersActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Leanplum.track("testEvent");
+                LeanplumCT.track("testEvent");
             }
         });
     }
@@ -41,7 +40,7 @@ public class TriggersActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Leanplum.advanceTo("testState");
+                LeanplumCT.advanceTo("testState");
             }
         });
     }
@@ -53,7 +52,7 @@ public class TriggersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Map attrib = new HashMap();
                 attrib.put("age", Double.toString(Math.random()));
-                Leanplum.setUserAttributes(attrib);
+                LeanplumCT.setUserAttributes(attrib);
             }
         });
     }
@@ -63,7 +62,7 @@ public class TriggersActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Leanplum.advanceTo("sessionLimit");
+                LeanplumCT.advanceTo("sessionLimit");
             }
         });
     }
@@ -73,7 +72,7 @@ public class TriggersActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Leanplum.advanceTo("lifetimeLimit");
+                LeanplumCT.advanceTo("lifetimeLimit");
             }
         });
     }
@@ -83,7 +82,7 @@ public class TriggersActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Leanplum.track("chainedInApp");
+                LeanplumCT.track("chainedInApp");
             }
         });
     }
@@ -93,7 +92,7 @@ public class TriggersActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Leanplum.track("DifferentPrioritySameTime");
+                LeanplumCT.track("DifferentPrioritySameTime");
             }
         });
     }

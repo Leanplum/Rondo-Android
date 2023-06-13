@@ -126,7 +126,7 @@
             <TextView
                 android:id="@+id/userIdLabel"
                 android:textSize="14dp"
-                android:text="User ID:"
+                android:text="Identity:"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
@@ -145,7 +145,7 @@
             <TextView
                 android:id="@+id/deviceIdLabel"
                 android:textSize="14dp"
-                android:text="Device ID:"
+                android:text="CTID:"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"

@@ -10,10 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.leanplum.Leanplum;
-import com.leanplum.LeanplumInbox;
-import com.leanplum.LeanplumInboxMessage;
-
 import java.io.File;
 
 public class AppInboxActivity extends AppCompatActivity {
@@ -22,12 +18,6 @@ public class AppInboxActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_inbox);
-
-        LeanplumInbox inbox = Leanplum.getInbox();
-        for (LeanplumInboxMessage message : inbox.allMessages()) {
-            createTableRow(message.getTitle(), message.getSubtitle(), message.getImageFilePath());
-            message.read(); //todo; abstract
-        }
 
     }
 

@@ -5,7 +5,7 @@ apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect'
 
-def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "7.1.2"
+//def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "7.1.2"
 def LEANPLUM_CT_SDK_VERSION = System.getenv("LEANPLUM_CT_SDK_VERSION") ?: "5.0.0"
 
 ext {
@@ -24,8 +24,8 @@ android {
         applicationId "com.leanplum.rondo"
         minSdkVersion 19 // Xiaomi SDK 5.0.6 needs 19
         targetSdkVersion 33
-        versionCode
-        versionName "1.0"
+        versionCode 2 // in other Rondo it is not set and equals to 0
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -52,7 +52,7 @@ android {
 
     buildTypes {
         buildTypes.each {
-            it.buildConfigField "String", "LEANPLUM_SDK_VERSION", "\"${LEANPLUM_SDK_VERSION}\""
+            it.buildConfigField "String", "CT_SDK_VERSION", "\"${LEANPLUM_CT_SDK_VERSION}\""
         }
         release {
             if (signingProperties.containsKey(KEYSTORE_PATH_PROP)) {
@@ -125,27 +125,46 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.3.0' // for FCM
 
     // CleverTap SDK
-    implementation "com.clevertap.android:clevertap-android-sdk:${LEANPLUM_CT_SDK_VERSION}"
-    // RenderMax
-    //implementation "com.clevertap.android:clevertap-rendermax-sdk:1.0.2"
+    if (findProject(':clevertap-core') == null) {
+        //implementation "com.clevertap.android:clevertap-android-sdk:${LEANPLUM_CT_SDK_VERSION}"
+        implementation files('libs/clevertap-android-sdk-5.0.0-lp.aar')
 
-    // CleverTap
-    // implementation 'com.google.android.gms:play-services-base:18.1.0'
-    // implementation 'com.android.installreferrer:installreferrer:2.2'
-    implementation "com.clevertap.android:push-templates:1.0.9"
-    // CleverTap Xiaomi SDK for both dev and prod flavors
-    implementation "com.clevertap.android:clevertap-xiaomi-sdk:1.5.2"
-    implementation files("libs/MiPush_SDK_Client_5_1_1-G_3rd.aar")
+        // RenderMax
+        //implementation "com.clevertap.android:clevertap-rendermax-sdk:1.0.2"
+
+        // CleverTap
+        // implementation 'com.google.android.gms:play-services-base:18.1.0'
+        // implementation 'com.android.installreferrer:installreferrer:2.2'
+
+        implementation "com.clevertap.android:push-templates:1.0.9"
+        implementation "com.clevertap.android:clevertap-xiaomi-sdk:1.5.2"
+        implementation files("libs/MiPush_SDK_Client_5_1_1-G_3rd.aar")
+    } else {
+        // You can use Rondo app as an application inside the CleverTap SDK repo.
+        // Have both repos checked out in the same parent directory.
+        // In clevertap-android-sdk/settings.gradle add the following:
+        //
+        //  include ':RondoApp'
+        //  project(':RondoApp').projectDir = new File("$rootDir/../Rondo-Android/RondoApp")
+        //
+        implementation project(':clevertap-core')
+        implementation project(':clevertap-geofence')
+        //implementation project(':clevertap-hms')
+        implementation project(':clevertap-xps')
+        implementation project(':clevertap-pushtemplates')
+        //implementation files('libs/pushservice-7.0.0.27.jar')
+    }
+
 
     // SDK from released packages (prod flavor)
-    prodImplementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
-    prodImplementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
-    prodImplementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
-    prodImplementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
-    if (isHmsSupported(LEANPLUM_SDK_VERSION)) {
-        println "adding leanplum-hms dependency"
-        prodImplementation "com.leanplum:leanplum-hms:${LEANPLUM_SDK_VERSION}"
-    }
+//    prodImplementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
+//    prodImplementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
+//    prodImplementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
+//    prodImplementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
+//    if (isHmsSupported(LEANPLUM_SDK_VERSION)) {
+//        println "adding leanplum-hms dependency"
+//        prodImplementation "com.leanplum:leanplum-hms:${LEANPLUM_SDK_VERSION}"
+//    }
 
     // SDK from source (dev flavor)
     if (findProject(':AndroidSDK') != null) {

@@ -9,22 +9,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.leanplum.Leanplum;
-import com.leanplum.Var;
-import com.leanplum.SecuredVars;
+import com.clevertap.android.sdk.CleverTapAPI;
+import com.clevertap.android.sdk.variables.Var;
 import java.lang.ref.WeakReference;
 
 
 public class VariablesFragment extends Fragment {
-    Var<String> varString = Var.define("var_text", "Default value in code");
-    Var<Number> varNumber = Var.define("var_number", null);
-    Var<Boolean> varBoolean = Var.define("var_bool", false);
-    Var<String> varFile = Var.defineFile("var_file", null);
+    Var<String> varString;
+    Var<Number> varNumber;
+    Var<Boolean> varBoolean;
 
     private Thread signatureVerificationThread;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        varString = CleverTapAPI.getDefaultInstance(getActivity()).defineVariable("var_text", "Default value in code");
+        varNumber = CleverTapAPI.getDefaultInstance(getActivity()).defineVariable("var_number", null);
+        varBoolean = CleverTapAPI.getDefaultInstance(getActivity()).defineVariable("var_bool", false);
+
         return inflater.inflate(R.layout.activity_variables, container, false);
     }
 
@@ -32,7 +34,6 @@ public class VariablesFragment extends Fragment {
     public void onStart() {
         super.onStart();
         updateViewWithVariables();
-        verifySignature();
     }
 
     private void updateViewWithVariables() {
@@ -44,30 +45,6 @@ public class VariablesFragment extends Fragment {
 
         TextView bool = getView().findViewById(R.id.varBool);
         bool.setText(varBoolean.stringValue);
-
-        TextView file = getView().findViewById(R.id.varFile);
-        file.setText(varFile.stringValue);
-
-        if (varFile.fileValue()!= null) {
-            java.io.File imgFile = new java.io.File(varFile.fileValue());
-            if(imgFile.exists()) {
-                ImageView myImage = getView().findViewById(R.id.varFileImage);
-                myImage.setImageURI(Uri.fromFile(imgFile));
-            }
-        }
-    }
-
-    private void verifySignature() {
-        TextView view = getView().findViewById(R.id.verificationResult);
-
-        SecuredVars securedVars = Leanplum.securedVars();
-        if (securedVars != null) {
-            view.setText("verifying...");
-            signatureVerificationThread = new SignatureVerificationThread(securedVars, view);
-            signatureVerificationThread.start();
-        } else {
-            view.setText("missing");
-        }
     }
 
     public void onStop() {
@@ -75,37 +52,6 @@ public class VariablesFragment extends Fragment {
         if (signatureVerificationThread != null) {
             signatureVerificationThread.interrupt();
             signatureVerificationThread = null;
-        }
-    }
-
-    private static class SignatureVerificationThread extends Thread {
-        SecuredVars securedVars;
-        WeakReference<TextView> viewRef;
-
-        SignatureVerificationThread(SecuredVars securedVars, TextView view) {
-            this.securedVars = securedVars;
-            viewRef = new WeakReference<>(view);
-        }
-
-        @Override
-        public void run() {
-            String publicKey = SecuredVarsHelper.downloadPublicKey();
-            if (publicKey == null) {
-                showText("public key error");
-            } else {
-                if (SecuredVarsHelper.verify(securedVars, publicKey)) {
-                    showText("verified");
-                } else {
-                    showText("verification error");
-                }
-            }
-        }
-
-        void showText(String text) {
-            TextView view = viewRef.get();
-            if (view != null) {
-                view.post(() -> view.setText(text));
-            }
         }
     }
 }

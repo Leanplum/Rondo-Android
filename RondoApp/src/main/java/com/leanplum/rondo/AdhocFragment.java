@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.leanplum.Leanplum;
-
+import com.clevertap.android.sdk.CleverTapAPI;
+import com.clevertap.android.sdk.leanplum.LeanplumCT;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -51,11 +51,11 @@ public class AdhocFragment extends Fragment {
         params.put(paramKey, paramValue);
 
         if (TextUtils.isEmpty(paramKey) && isDouble(paramValue)) {
-          Leanplum.track(eventName.trim(), Double.parseDouble(paramValue));
+          LeanplumCT.track(eventName.trim(), Double.parseDouble(paramValue));
         } else if (paramKey != null && paramValue != null) {
-            Leanplum.track(eventName.trim(), params);
+          LeanplumCT.track(eventName.trim(), params);
         } else {
-            Leanplum.track(eventName.trim());
+          LeanplumCT.track(eventName.trim());
         }
         // TODO: figure out how to alert event response/status
 
@@ -81,9 +81,9 @@ public class AdhocFragment extends Fragment {
         Map<String, String> params = new HashMap<>();
         if (!TextUtils.isEmpty(paramKey) && !TextUtils.isEmpty(paramValue)) {
             params.put(paramKey, paramValue);
-            Leanplum.advanceTo(stateName, params);
+          LeanplumCT.advanceTo(stateName, params);
         } else {
-            Leanplum.advanceTo(stateName);
+          LeanplumCT.advanceTo(stateName);
         }
         // TODO: figure out how to alert state response/status
 
@@ -100,9 +100,9 @@ public class AdhocFragment extends Fragment {
         String value = attrValue.equals("null") ? null : attrValue.trim();
         attrib.put(attrKey.trim(), value);
         if (TextUtils.isEmpty(userId)) {
-          Leanplum.setUserAttributes(attrib);
+          LeanplumCT.setUserAttributes(attrib);
         } else {
-          Leanplum.setUserAttributes(userId, attrib);
+          LeanplumCT.setUserAttributes(userId, attrib);
         }
         // TODO: figure out how to alert state response/status
 
@@ -110,7 +110,7 @@ public class AdhocFragment extends Fragment {
 
   private void setUserId() {
     String userId = ((EditText)getView().findViewById(R.id.userIdKey)).getText().toString();
-    Leanplum.setUserId(userId.trim());
+    LeanplumCT.setUserId(userId.trim());
   }
 
   private void generateDeviceId() {
@@ -120,26 +120,14 @@ public class AdhocFragment extends Fragment {
 
   private void setDeviceId() {
     String deviceId = ((EditText)getView().findViewById(R.id.deviceIdKey)).getText().toString();
-    Leanplum.forceNewDeviceId(deviceId.trim());
+    //Leanplum.forceNewDeviceId(deviceId.trim());
   }
 
   private void forceContentUpdate() {
-    Leanplum.forceContentUpdate();
+    CleverTapAPI.getDefaultInstance(getContext()).fetchVariables();
   }
 
-    private void setDeviceLocation() {
-        Float latitude = Float.parseFloat(
-                ((EditText)getView().findViewById(R.id.locLatitude)).getText().toString());
-        Float longitude = Float.parseFloat(
-                ((EditText)getView().findViewById(R.id.locLongitude)).getText().toString());
 
-        Location location = new Location(LocationManager.GPS_PROVIDER);
-        location.setLatitude(latitude);
-        location.setLongitude(longitude);
-        Leanplum.setDeviceLocation(location);
-        // TODO: figure out how to alert state response/status
-
-    }
 
     private void setDeviceLocation(Intent data) {
 //        Place place = PlacePicker.getPlace(this, data);
@@ -178,7 +166,6 @@ public class AdhocFragment extends Fragment {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        setDeviceLocation();
                     }
                 });
 
