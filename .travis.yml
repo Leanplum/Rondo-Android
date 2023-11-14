@@ -58,8 +58,7 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: releases
-  api_key:
-    secure: "WScgq+7KqSRjwErfwBtHiXFlmFShvrJicPMm1Bq4sGoC9z6UpBqo0WYONiRUs5JVKUbaSnK7ggt5BNA5QZvXo+N9Kr3aN233dc1/e4Rc2wuN+eSFyyXY2FzubPfNiGa9Iw+WqmIiicVhfKAcMJUzLzn4kuz2uvmfHZvdIlelAehDutvc4cHoPmfHgq3MzItSEOS6InMSFOvHDK3OEgVjUo08p42gTT4dKXPvxa/5NjuQ5QVTg6tR3nCsHij20tCfvYs6PhQLvvesqcE5hmJFsJY/6CbzuFH68M/CJGvri98gJ8WZfiuM+Esgcwno2D7hbPjlgL1j8gkG8AiugayoXoJ5frz1jV9VG29uuS846wPKDAJbPsNVAANVnH4xFFD82adyzzG5eIxQTw6WghRLwe+z5XBG3NmvVy9YRTnyqlvXrMJyOf7rAT7J6y3BTm5gt3MY0D2Oqm1hWdpksbPeFcBzb+VftFXIL/2S4lKgv+TKtBT+T8XYotPXsEUbvJA7yzlnivCKah+Bjq0z2ZCl8j11Mek/lXHrfety1hZerWAhjoXb1q+34KZ0LVvRq+4dyntliPUbpXHBVbAeDcszBggcJLK+WwTz3hNy6XDk4a7r54mYWqJ4p7+RWTmqIAI62APUWByRXp/bj5j/jgpSkc3rC1+TQ45Tv0byd6JHmNo="
+  api_key: ${GITHUB_TOKEN}
   file: "RondoApp/build/outputs/apk/prod/release/RondoApp-prod-release.apk"
   name: "Android SDK $LEANPLUM_SDK_VERSION"
 #  tag: "$LEANPLUM_SDK_VERSION"
