@@ -1,10 +1,6 @@
 package com.leanplum.rondo;
 
-import android.app.Application;
-import android.content.Context;
-import android.os.Build;
-
-import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 import com.clevertap.android.pushtemplates.PushTemplateNotificationHandler;
 import com.clevertap.android.sdk.CleverTapAPI;
 import com.clevertap.android.sdk.pushnotification.PushConstants;
@@ -15,14 +11,13 @@ import com.leanplum.annotations.Parser;
 import com.leanplum.internal.Log.Level;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
-
 import com.leanplum.rondo.models.LeanplumEnv;
 import com.leanplum.rondo.models.RondoProductionMode;
 import io.realm.Realm;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RondoApplication extends Application {
+public class RondoApplication extends MultiDexApplication {
 
     /**
      * Update user info here
@@ -105,12 +100,5 @@ public class RondoApplication extends Application {
         startAttributes.put("startAttributeInt", 1);
         startAttributes.put("startAttributeString", "stringValueFromStart");
         Leanplum.start(this, startAttributes);
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-            MultiDex.install(this); // enable multiDex for older devices
     }
 }
