@@ -1,10 +1,6 @@
 package com.leanplum.rondo;
 
-import android.app.Application;
-import android.content.Context;
-import android.os.Build;
-
-import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 import com.clevertap.android.pushtemplates.PushTemplateNotificationHandler;
 import com.clevertap.android.sdk.ActivityLifecycleCallback;
 import com.clevertap.android.sdk.CleverTapAPI;
@@ -14,9 +10,12 @@ import com.clevertap.android.sdk.pushnotification.PushConstants;
 import com.google.firebase.FirebaseApp;
 import com.leanplum.rondo.models.InternalState;
 
+import com.leanplum.rondo.models.LeanplumApp;
+import com.leanplum.rondo.models.LeanplumEnv;
+import com.leanplum.rondo.models.RondoProductionMode;
 import io.realm.Realm;
 
-public class RondoApplication extends Application {
+public class RondoApplication extends MultiDexApplication {
 
     /**
      * Update user info here
@@ -55,8 +54,8 @@ public class RondoApplication extends Application {
 
     private void initCleverTap() {
         // Rondo App from Xiaomi console
-        CleverTapAPI.changeXiaomiCredentials("2882303761518843048", "5601884323048");
-        CleverTapAPI.enableXiaomiPushOn(PushConstants.XIAOMI_MIUI_DEVICES); // using ALL_DEVICES would spawn ":pushservice" process on non-Xiaomi devices
+//        CleverTapAPI.changeXiaomiCredentials("2882303761518843048", "5601884323048");
+//        CleverTapAPI.enableXiaomiPushOn(PushConstants.XIAOMI_MIUI_DEVICES); // using ALL_DEVICES would spawn ":pushservice" process on non-Xiaomi devices
         CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
         // Register notification channels
 //        Leanplum.addCleverTapInstanceCallback(cleverTapInstance -> {
@@ -98,11 +97,4 @@ public class RondoApplication extends Application {
 //        startAttributes.put("startAttributeString", "stringValueFromStart");
 //        Leanplum.start(this, startAttributes);
 //    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-            MultiDex.install(this); // enable multiDex for older devices
-    }
 }
