@@ -1,9 +1,9 @@
 package com.leanplum.rondo;
 
 import androidx.multidex.MultiDexApplication;
+
 import com.clevertap.android.pushtemplates.PushTemplateNotificationHandler;
 import com.clevertap.android.sdk.CleverTapAPI;
-import com.clevertap.android.sdk.pushnotification.PushConstants;
 import com.google.firebase.FirebaseApp;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
@@ -13,16 +13,13 @@ import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
 import com.leanplum.rondo.models.RondoProductionMode;
-import io.realm.Realm;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class RondoApplication extends MultiDexApplication {
+import io.realm.Realm;
 
-    /**
-     * Update user info here
-     */
-    private String username = "some-qa-user@leanplum.com";
+public class RondoApplication extends MultiDexApplication {
 
     @Override
     public void onCreate() {
@@ -57,9 +54,6 @@ public class RondoApplication extends MultiDexApplication {
     }
 
     private void initCleverTap() {
-        // Rondo App from Xiaomi console
-        CleverTapAPI.changeXiaomiCredentials("2882303761518843048", "5601884323048");
-        CleverTapAPI.enableXiaomiPushOn(PushConstants.XIAOMI_MIUI_DEVICES); // using ALL_DEVICES would spawn ":pushservice" process on non-Xiaomi devices
         CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
         // Register notification channels
         Leanplum.addCleverTapInstanceCallback(cleverTapInstance -> {

@@ -17,12 +17,6 @@ if (new File(leanplumSdkSourceDir).exists()) {
     include ':AndroidSDKFcm'
     project(':AndroidSDKFcm').projectDir = new File("$leanplumSdkSourceDir/AndroidSDKFcm")
 
-    def miPushDir = new File("$leanplumSdkSourceDir/AndroidSDKMiPush")
-    if (miPushDir.exists()) {
-        include ':AndroidSDKMiPush'
-        project(':AndroidSDKMiPush').projectDir = miPushDir
-    }
-
     def hmsDir = new File("$leanplumSdkSourceDir/AndroidSDKHms")
     if (hmsDir.exists()) {
         include ':AndroidSDKHms'
