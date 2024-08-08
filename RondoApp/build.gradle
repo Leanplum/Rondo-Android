@@ -5,7 +5,7 @@ apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect'
 
-def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "7.5.0-beta1"
+def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "7.5.0-beta2"
 def LEANPLUM_CT_SDK_VERSION = System.getenv("LEANPLUM_CT_SDK_VERSION") ?: "6.2.1"
 
 ext {
@@ -20,11 +20,11 @@ def signingProperties = getSigningProperties()
 android {
     namespace 'com.leanplum.rondo'
 
-    compileSdkVersion 33
+    compileSdk 34
     defaultConfig {
         applicationId "com.leanplum.rondo"
         minSdkVersion 19
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -80,6 +80,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
     }
     lint {
         abortOnError false
@@ -157,20 +160,23 @@ dependencies {
     }
 
 
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.1.0'
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+    implementation 'androidx.appcompat:appcompat:1.6.0-rc01'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'com.google.android.material:material:1.4.0'
     implementation 'com.google.android.gms:play-services-places:17.0.0'
-    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.vectordrawable:vectordrawable:1.2.0'
     implementation "androidx.multidex:multidex:2.0.1"
     testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // Google library for app rating
-    implementation 'com.google.android.play:core:1.8.2'
+    implementation 'com.google.android.play:review:2.0.1'
     // Library for scanning QR codes. Do not use latest version as it bumps minSDK.
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     // Json canonicalization for Variable Signing
