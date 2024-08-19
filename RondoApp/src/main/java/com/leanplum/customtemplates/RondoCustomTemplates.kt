@@ -1,5 +1,6 @@
 package com.leanplum.customtemplates
 
+import android.app.Activity
 import android.app.Dialog
 import com.clevertap.android.sdk.CleverTapAPI
 import com.clevertap.android.sdk.inapp.customtemplates.CustomTemplate
@@ -36,14 +37,16 @@ object RondoCustomTemplates {
             }
 
             override fun onPresent(context: CustomTemplateContext.TemplateContext) {
-                val currentActivity = LeanplumActivityHelper.getCurrentActivity()
-                currentActivity.showCtTemplateDialog(context)
+                runWithCurrentActivity {
+                    showCtTemplateDialog(context)
+                }
             }
 
         }
         val functionPresenter = FunctionPresenter {
-            val currentActivity = LeanplumActivityHelper.getCurrentActivity()
-            currentActivity.showCtTemplateDialog(it)
+            runWithCurrentActivity {
+                showCtTemplateDialog(it)
+            }
         }
 
         val templates = createCleverTapTemplates(templatePresenter, functionPresenter)
@@ -56,8 +59,9 @@ object RondoCustomTemplates {
     fun defineLeanplumTemplates() {
         val presentHandler = object : ActionCallback() {
             override fun onResponse(actionContext: ActionContext): Boolean {
-                val currentActivity = LeanplumActivityHelper.getCurrentActivity()
-                currentActivity.showLpTemplateDialog(actionContext)
+                runWithCurrentActivity {
+                    showLpTemplateDialog(actionContext)
+                }
                 return true
             }
         }
@@ -74,6 +78,17 @@ object RondoCustomTemplates {
         lpDefinedTemplates.addAll(actions)
         actions.forEach {
             ActionManager.getInstance().defineAction(it)
+        }
+    }
+
+    private fun runWithCurrentActivity(action: Activity.() -> Unit) {
+        val currentActivity = LeanplumActivityHelper.getCurrentActivity()
+        if (currentActivity == null || currentActivity.isFinishing) {
+            LeanplumActivityHelper.queueActionUponActive {
+                runWithCurrentActivity(action)
+            }
+        } else {
+            action(currentActivity)
         }
     }
 }
