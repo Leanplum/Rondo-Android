@@ -23,12 +23,19 @@
         app:layout_constraintTop_toBottomOf="@id/title" />
 
     <Button
+        android:id="@+id/set_present_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Presented"
+        app:layout_constraintLeft_toRightOf="@id/hide_button"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <Button
         android:id="@+id/dismiss_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:text="Dismiss"
-        app:layout_constraintLeft_toRightOf="@id/hide_button"
+        app:layout_constraintLeft_toRightOf="@id/set_present_button"
         app:layout_constraintTop_toBottomOf="@id/title" />
 
     <TextView

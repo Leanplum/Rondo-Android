@@ -31,6 +31,12 @@ fun Activity.showCtTemplateDialog(context: CustomTemplateContext) {
         hideButton.isVisible = RondoCustomTemplates.ctHiddenTemplateContext == null
     }
 
+    dialog.findViewById<Button>(R.id.set_present_button)?.let { presentButton ->
+        presentButton.setOnClickListener {
+            context.setPresented()
+        }
+    }
+
     dialog.findViewById<Button>(R.id.dismiss_button)?.setOnClickListener {
         context.setDismissed()
         dialog.dismiss()
