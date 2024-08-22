@@ -82,13 +82,8 @@ object RondoCustomTemplates {
     }
 
     private fun runWithCurrentActivity(action: Activity.() -> Unit) {
-        val currentActivity = LeanplumActivityHelper.getCurrentActivity()
-        if (currentActivity == null || currentActivity.isFinishing) {
-            LeanplumActivityHelper.queueActionUponActive {
-                runWithCurrentActivity(action)
-            }
-        } else {
-            action(currentActivity)
+        LeanplumActivityHelper.queueActionUponActive {
+            action(LeanplumActivityHelper.getCurrentActivity())
         }
     }
 }
