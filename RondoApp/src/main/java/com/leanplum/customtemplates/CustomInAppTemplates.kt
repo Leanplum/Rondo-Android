@@ -71,7 +71,7 @@ fun createLeanplumTemplates(
                         "int" to 0, "string" to "Default"
                     )
                 )
-                .withAction("action", ""),
+                .withAction("Open action", ""),
             options = mapOf(),
             presentHandler = presentHandler,
             dismissHandler = dismissHandler
