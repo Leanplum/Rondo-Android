@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
+import com.leanplum.customtemplates.CustomTemplatesActivity;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
@@ -50,6 +51,7 @@ public class AppSetupFragment extends Fragment {
         createAppPickerButton();
         createEnvPickerButton();
         createMigrationButton();
+        createCustomTemplatesButton();
         createChannelButton();
         setupProductionSwitch();
     }
@@ -89,6 +91,15 @@ public class AppSetupFragment extends Fragment {
             startActivity(myIntent);
         });
     }
+
+    private void createCustomTemplatesButton() {
+        Button button = getView().findViewById(R.id.custom_templates);
+        button.setOnClickListener(v -> {
+            Intent myIntent = new Intent(getActivity(), CustomTemplatesActivity.class);
+            startActivity(myIntent);
+        });
+    }
+
 
     private void createStartButton() {
         Button button = getView().findViewById(R.id.call_start);

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context="com.leanplum.customtemplates.CTCustomTemplateActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/clevertap_sync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sync"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CleverTap Templates"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/clevertap_sync"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/clevertap_sync"
+                app:layout_constraintTop_toTopOf="@id/clevertap_sync" />
+
+
+            <Button
+                android:id="@+id/clevertap_show_hidden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clevertap_sync" />
+
+            <TextView
+                android:id="@+id/clevertap_hidden_template_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CleverTap Hidden Template"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/clevertap_show_hidden"
+                app:layout_constraintTop_toBottomOf="@id/clevertap_hidden_template"
+                app:layout_constraintTop_toTopOf="@id/clevertap_show_hidden" />
+
+            <TextView
+                android:id="@+id/clevertap_hidden_template"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="none"
+                app:layout_constraintBottom_toBottomOf="@id/clevertap_show_hidden"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/clevertap_show_hidden"
+                app:layout_constraintTop_toBottomOf="@id/clevertap_hidden_template_label" />
+
+            <TextView
+                android:id="@+id/clevertap_templates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/clevertap_show_hidden" />
+
+            <TextView
+                android:id="@+id/leanplum_templates_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Leanplum Templates"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clevertap_templates" />
+
+            <Button
+                android:id="@+id/leanplum_show_hidden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/leanplum_templates_label" />
+
+            <TextView
+                android:id="@+id/leanplum_hidden_template_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Leanplum Hidden Template"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/leanplum_hidden_template"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/leanplum_show_hidden"
+                app:layout_constraintTop_toTopOf="@id/leanplum_show_hidden" />
+
+            <TextView
+                android:id="@+id/leanplum_hidden_template"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="none"
+                app:layout_constraintBottom_toBottomOf="@id/leanplum_show_hidden"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/leanplum_show_hidden"
+                app:layout_constraintTop_toBottomOf="@id/leanplum_hidden_template_label" />
+
+            <TextView
+                android:id="@+id/leanplum_templates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/leanplum_show_hidden" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

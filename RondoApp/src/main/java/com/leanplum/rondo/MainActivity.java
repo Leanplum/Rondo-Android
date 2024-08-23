@@ -1,12 +1,13 @@
 package com.leanplum.rondo;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,34 +17,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
-//        bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+        bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
         bottomNavigationView.setOnNavigationItemSelectedListener
-                (new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment selectedFragment = null;
-                        switch (item.getItemId()) {
-                            case R.id.sdq_qa:
-                                selectedFragment = new SdkQaFragment();
-                                break;
-                            case R.id.adhoc:
-                                selectedFragment = new AdhocFragment();
-                                break;
-                            case R.id.app_setup:
-                                selectedFragment = new AppSetupFragment();
-                                break;
-                            case R.id.app_inbox:
-                                selectedFragment = new AppInboxFragment();
-                                break;
-                            case R.id.variables:
-                                selectedFragment = new VariablesFragment();
-                                break;
-                        }
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, selectedFragment);
-                        transaction.commit();
-                        return true;
+                (item -> {
+                    Fragment selectedFragment;
+                    switch (item.getItemId()) {
+                        case R.id.sdq_qa:
+                            selectedFragment = new SdkQaFragment();
+                            break;
+                        case R.id.adhoc:
+                            selectedFragment = new AdhocFragment();
+                            break;
+                        case R.id.app_inbox:
+                            selectedFragment = new AppInboxFragment();
+                            break;
+                        case R.id.variables:
+                            selectedFragment = new VariablesFragment();
+                            break;
+                        case R.id.app_setup:
+                        default:
+                            selectedFragment = new AppSetupFragment();
+                            break;
                     }
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.commit();
+                    return true;
                 });
 
         //Manually displaying the first fragment - one time only

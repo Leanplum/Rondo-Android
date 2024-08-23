@@ -284,6 +284,13 @@
           android:textSize="14dp"
           />
         <Button
+            android:id="@+id/custom_templates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Custom Templates"
+            android:textSize="14dp"
+            />
+        <Button
             android:id="@+id/call_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

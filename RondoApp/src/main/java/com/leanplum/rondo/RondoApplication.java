@@ -8,6 +8,8 @@ import com.google.firebase.FirebaseApp;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.annotations.Parser;
+import com.leanplum.customtemplates.CustomInAppTemplatesKt;
+import com.leanplum.customtemplates.RondoCustomTemplates;
 import com.leanplum.internal.Log.Level;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
@@ -54,9 +56,11 @@ public class RondoApplication extends MultiDexApplication {
     }
 
     private void initCleverTap() {
+        RondoCustomTemplates.registerCleverTapTemplates();
         CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
         // Register notification channels
         Leanplum.addCleverTapInstanceCallback(cleverTapInstance -> {
+
             CleverTapAPI.createNotificationChannel(
                 RondoApplication.this,
                 "YourChannelId",
@@ -89,6 +93,8 @@ public class RondoApplication extends MultiDexApplication {
         Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
         Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
         Parser.parseVariablesForClasses(VariablesFragment.class);
+
+        RondoCustomTemplates.defineLeanplumTemplates();
 
         Map<String, Object> startAttributes = new HashMap<>();
         startAttributes.put("startAttributeInt", 1);
