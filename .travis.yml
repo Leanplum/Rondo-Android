@@ -56,6 +56,7 @@ deploy:
   api_key: ${GITHUB_TOKEN}
   file: "RondoApp/build/outputs/apk/prod/release/RondoApp-prod-release.apk"
   name: "Android SDK $LEANPLUM_SDK_VERSION"
+  dpl_version: 1.10.16
 #  tag: "$LEANPLUM_SDK_VERSION"
   on:
     branch: master
