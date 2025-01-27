@@ -5,8 +5,8 @@ apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect'
 
-def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "7.6.0"
-def LEANPLUM_CT_SDK_VERSION = System.getenv("LEANPLUM_CT_SDK_VERSION") ?: "7.1.0"
+def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "7.6.1-beta1"
+def LEANPLUM_CT_SDK_VERSION = System.getenv("LEANPLUM_CT_SDK_VERSION") ?: "7.1.1"
 
 ext {
     KEYSTORE_PATH_PROP = 'storeFilePath'
