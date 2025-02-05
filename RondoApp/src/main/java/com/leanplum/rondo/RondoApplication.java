@@ -23,6 +23,8 @@ import io.realm.Realm;
 
 public class RondoApplication extends MultiDexApplication {
 
+    public static CleverTapAPI cleverTapApi;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -60,6 +62,7 @@ public class RondoApplication extends MultiDexApplication {
         CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
         // Register notification channels
         Leanplum.addCleverTapInstanceCallback(cleverTapInstance -> {
+            cleverTapApi = cleverTapInstance;
 
             CleverTapAPI.createNotificationChannel(
                 RondoApplication.this,

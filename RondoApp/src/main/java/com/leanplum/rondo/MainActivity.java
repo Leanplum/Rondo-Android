@@ -1,11 +1,13 @@
 package com.leanplum.rondo;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.clevertap.android.sdk.CleverTapAPI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -49,5 +51,14 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, new AppSetupFragment());
         transaction.commit();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        CleverTapAPI cleverTapAPI = RondoApplication.cleverTapApi;
+        if (cleverTapAPI != null && intent != null && intent.getExtras() != null) {
+            cleverTapAPI.pushNotificationClickedEvent(intent.getExtras());
+        }
     }
 }
