@@ -1,46 +1,29 @@
 language: android
+dist: bionic
+jdk: openjdk17
 
 env:
   global:
     - JAVA_TOOL_OPTIONS=-Dhttps.protocols=TLSv1.2
-    - BUILD_API=34
-    - BUILD_TOOLS=34.0.0
-    - ANDROID_HOME=/usr/local/android-sdk
-    - TOOLS=${ANDROID_HOME}/cmdline-tools/latest
-    # PATH order is important, the 'emulator' script exists in more than one place
-    - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
 
 android:
   components:
     - tools
+    - platform-tools
+    - tools
+    - build-tools-34.0.0
+    - android-34
+    - extras;android;m2repository
 
-licenses:
+  licenses:
   - 'android-sdk-preview-license-.+'
   - 'android-sdk-license-.+'
   - 'google-gdk-license-.+'
 
 before_install:
-  - curl -s "https://get.sdkman.io" | bash
-  - source "$HOME/.sdkman/bin/sdkman-init.sh"
-  - sdk install java 17.0.2-open
-  - sdk use java 17.0.2-open
-  # Install cmdline-tools (older tools doesn't support Java 11)
-  - wget -q "https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip" -O android-commandline-tools-linux.zip
-  - mkdir -p ${ANDROID_HOME}/cmdline-tools
-  - unzip -q android-commandline-tools-linux.zip -d ${ANDROID_HOME}/cmdline-tools
-  - mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest
   # Decrypt keystore
   - mkdir -p keystore
   - openssl aes-256-cbc -K $encrypted_3e25ea35f95b_key -iv $encrypted_3e25ea35f95b_iv -in signingkey.jks.enc -out keystore/signingkey.jks -d
-
-before_script:
-  # Install Android SDK
-  - echo 'count=0' > /home/travis/.android/repositories.cfg # avoid harmless sdkmanager warning
-  - echo y | ${TOOLS}/bin/sdkmanager "platform-tools" >/dev/null
-  - echo y | ${TOOLS}/bin/sdkmanager "tools" >/dev/null
-  - echo y | ${TOOLS}/bin/sdkmanager "build-tools;$BUILD_TOOLS" >/dev/null
-  - echo y | ${TOOLS}/bin/sdkmanager "platforms;android-$BUILD_API" >/dev/null
-  - echo y | ${TOOLS}/bin/sdkmanager "extras;android;m2repository" >/dev/null
 
 branches:
   except:
