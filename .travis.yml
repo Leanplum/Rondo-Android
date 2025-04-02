@@ -11,8 +11,8 @@ android:
     - tools
     - platform-tools
     - tools
-    - build-tools-35.0.0
-    - android-35
+    - build-tools;35.0.0
+    - platforms;android-35
     - extras;android;m2repository
 
   licenses:
