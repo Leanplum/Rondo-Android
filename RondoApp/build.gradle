@@ -20,11 +20,11 @@ def signingProperties = getSigningProperties()
 android {
     namespace 'com.leanplum.rondo'
 
-    compileSdk 34
+    compileSdk 35
     defaultConfig {
         applicationId "com.leanplum.rondo"
-        minSdkVersion 19
-        targetSdkVersion 34
+        minSdkVersion 21
+        targetSdkVersion 35
         versionCode
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
