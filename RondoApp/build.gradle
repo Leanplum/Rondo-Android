@@ -5,8 +5,8 @@ apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect'
 
-def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "7.6.3"
-def LEANPLUM_CT_SDK_VERSION = System.getenv("LEANPLUM_CT_SDK_VERSION") ?: "7.1.2"
+def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "7.7.0"
+def LEANPLUM_CT_SDK_VERSION = System.getenv("LEANPLUM_CT_SDK_VERSION") ?: "7.3.1"
 
 ext {
     KEYSTORE_PATH_PROP = 'storeFilePath'
@@ -165,7 +165,7 @@ dependencies {
             because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
         }
     }
-    implementation 'androidx.appcompat:appcompat:1.6.0-rc01'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'com.google.android.gms:play-services-places:17.0.0'
